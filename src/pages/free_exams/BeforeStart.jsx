@@ -5,8 +5,6 @@ import axios from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import backIcon from "../../assets/img/leftArrow.png";
-const ExamInfos = lazy(() => import("../../components/common/ExamInfos"));
-const LogoTopCenter = lazy(() => import("../../components/LogoTopCenter"));
 const Modal = lazy(() => import("../../components/common/Modal"));
 //start exam => updtestudent
 const BeforeStart = () => {
@@ -73,144 +71,144 @@ const BeforeStart = () => {
       })
   }
   return (
-    <div className="px-28 md:px-4">
-      <div className="container mx-auto pt-8 pb-24">
-        <Suspense fallback={null}>
-          <LogoTopCenter />
-        </Suspense>
-        {/* exam content */}
-        <div className="grid grid-cols-6 gap-2 mt-4">
-          <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 ">
-            {/* exam infos */}
-            {examDetails ? (<Suspense fallback={<Skeleton></Skeleton>}>
-              <ExamInfos
-                name={examDetails?.name}
-              />
-            </Suspense>) : (<Skeleton height={70}></Skeleton>)}
-
-
-            {/* user input box */}
-            {examDetails &&
-              (<div className="border border-color-six mt-4 px-12 md:px-4 py-8 mb-4 md:py-4 rounded-md">
-                <form onSubmit={onSubmitHandler}>
-                  <div className="form-control mb-4">
-                    <label className="label">
-                      <span className="text-black">Name</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      name="name"
-                      placeholder="Enter your name"
-                      className="input border border-border-color-5"
-                    />
-                  </div>
-                  {
-                    examDetails.sscStatus && (
-                      <>
-                        <div className="form-control mb-4">
-                          <label className="label">
-                            <span className="text-black">SSC Roll no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="sscRoll"
-                            placeholder="SSC Roll no"
-                            className="input border border-border-color-5"
-                          />
-                        </div>
-                        <div className="form-control mb-4">
-                          <label className="label">
-                            <span className="text-black">SSC Registration no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="sscReg"
-                            placeholder="SSC Registration no"
-                            className="input border border-border-color-5"
-                          />
-                        </div>
-                      </>
-                    )
-                  }
-                  {
-                    examDetails.hscStatus && (
-                      <>
-                        <div className="form-control mb-4">
-                          <label className="label">
-                            <span className="text-black">HSC Roll no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="hscRoll"
-                            placeholder="HSC Roll no"
-                            className="input border border-border-color-5"
-                          />
-                        </div>
-                        <div className="form-control mb-4">
-                          <label className="label">
-                            <span className="text-black">HSC Registration no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="hscReg"
-                            placeholder="HSC Registration no"
-                            className="input border border-border-color-5"
-                          />
-                        </div>
-                      </>
-                    )
-                  }
-                  <div className="form-control mb-4">
-                    <label className="label">
-                      <span className="text-black">Institution Name</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      name="institution"
-                      placeholder="Enter institution name"
-                      className="input border border-border-color-5"
-                    />
-                  </div>
-                  <div className="form-control mb-4 ">
-                    <label className="label">
-                      <span className="text-black">Mobile Number</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      name="mobileNo"
-                      placeholder="Enter mobile number"
-                      className={`input border ${checkNumber !== "" ? 'border-rose-600' : 'border-border-5'} focus:border-indigo-600`}
-                      onChange={(e) => checkNumberFunction(e)}
-                    />
-                  </div>
-                  {/* start exam button */}
-                  <div className="form-control mb-4">
-                    <button type="submit" className="block text-center bg-color-one text-white rounded-md py-4 mt-6 mb-4 disabled:bg-color-six" disabled={checkNumber}>Start Exam</button>
-                  </div>
-                </form>
-
-                <BackButton
-                  title="Back"
-                  url="/"
-                  icon={backIcon}
-                />
-              </div>)
-            }
-          </div>
+    <>
+      <div className="flex flex-row bg-white text-center mb-8">
+        <div className='h-[68px] mx-auto'>
+          <Link to="/home">
+            <img src="/images/logo.png" alt="logo" className='w-64' />
+          </Link>
         </div>
       </div>
+      <div className="px-4">
+        <div className="max-w-3xl container mx-auto pt-8 pb-24">
+          {/* exam content */}
+          <div className="grid grid-cols-6 gap-2 mt-4">
+            <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 ">
 
-      <Suspense fallback={null}>
-        <Modal {...error} />
-      </Suspense>
-    </div>
+              {/* user input box */}
+              {examDetails &&
+                (<div className="border border-color-six mt-4 px-12 md:px-4 py-8 mb-4 md:py-4 rounded-lg bg-white">
+                  <h2 className="font-bold text-3xl text-center text-title-2">My Profile</h2>
+                  <form onSubmit={onSubmitHandler}>
+                    <div className="form-control mb-4">
+                      <label className="label">
+                        <span className="text-black">Name</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        name="name"
+                        placeholder="Enter your name"
+                        className="input border border-border-color-5"
+                      />
+                    </div>
+                    {
+                      examDetails.sscStatus && (
+                        <>
+                          <div className="form-control mb-4">
+                            <label className="label">
+                              <span className="text-black">SSC Roll no</span>
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              name="sscRoll"
+                              placeholder="SSC Roll no"
+                              className="input border border-border-color-5"
+                            />
+                          </div>
+                          <div className="form-control mb-4">
+                            <label className="label">
+                              <span className="text-black">SSC Registration no</span>
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              name="sscReg"
+                              placeholder="SSC Registration no"
+                              className="input border border-border-color-5"
+                            />
+                          </div>
+                        </>
+                      )
+                    }
+                    {
+                      examDetails.hscStatus && (
+                        <>
+                          <div className="form-control mb-4">
+                            <label className="label">
+                              <span className="text-black">HSC Roll no</span>
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              name="hscRoll"
+                              placeholder="HSC Roll no"
+                              className="input border border-border-color-5"
+                            />
+                          </div>
+                          <div className="form-control mb-4">
+                            <label className="label">
+                              <span className="text-black">HSC Registration no</span>
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              name="hscReg"
+                              placeholder="HSC Registration no"
+                              className="input border border-border-color-5"
+                            />
+                          </div>
+                        </>
+                      )
+                    }
+                    <div className="form-control mb-4">
+                      <label className="label">
+                        <span className="text-black">Institution Name</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        name="institution"
+                        placeholder="Enter institution name"
+                        className="input border border-border-color-5"
+                      />
+                    </div>
+                    <div className="form-control mb-4 ">
+                      <label className="label">
+                        <span className="text-black">Mobile Number</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        name="mobileNo"
+                        placeholder="Enter mobile number"
+                        className={`input border ${checkNumber !== "" ? 'border-rose-600' : 'border-border-5'} focus:border-indigo-600`}
+                        onChange={(e) => checkNumberFunction(e)}
+                      />
+                    </div>
+                    {/* start exam button */}
+                    <div className="form-control mb-4">
+                      <button type="submit" className="block text-center bg-color-one text-white rounded-md py-4 mt-6 mb-4 disabled:bg-color-six" disabled={checkNumber}>Start Exam</button>
+                    </div>
+                  </form>
+
+                  <BackButton
+                    title="Back"
+                    url="/"
+                    icon={backIcon}
+                  />
+                </div>)
+              }
+            </div>
+          </div>
+        </div>
+
+        <Suspense fallback={null}>
+          <Modal {...error} />
+        </Suspense>
+      </div>
+    </>
   );
 };
 
