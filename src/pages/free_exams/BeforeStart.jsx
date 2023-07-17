@@ -1,8 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 
-import Skeleton from 'react-loading-skeleton'
 import axios from "../../utils/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import backIcon from "../../assets/img/leftArrow.png";
 const Modal = lazy(() => import("../../components/common/Modal"));
