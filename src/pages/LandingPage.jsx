@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense, lazy } from 'react'
-import { Link } from 'react-router-dom';
 import axios from "../utils/axios";
 import RightArrow from '../components/common/svg/RightArrow';
+import { Link } from 'react-router-dom';
 
 const LogoTopCenter = lazy(() => import("../components/LogoTopCenter"));
 
@@ -11,7 +11,7 @@ const LandingPage = () => {
         if (localStorage.getItem("STDNTTKN")) {
             window.location.href = '/home';
         }
-        return ()=>{
+        return () => {
             if (!sessionStorage.getItem("freeExam")) {
                 axios.get('/api/freestudent/getfreeexamid')
                     .then(res => {
@@ -20,9 +20,9 @@ const LandingPage = () => {
                     }).catch(err => {
                         console.log(err);
                     });
-            }else{
+            } else {
                 const res = JSON.parse(sessionStorage.getItem("freeExam"));
-                if(res){
+                if (res) {
                     setFreeExam(res._id);
                 }
             }
@@ -30,19 +30,21 @@ const LandingPage = () => {
     }, []);
 
     return (
-        <div className="container mx-auto min-h-without-footer items-center pt-[118px]">
+        <div className="container mx-auto min-h-without-footer items-center pt-[90px]">
             <Suspense fallback={null}>
                 <LogoTopCenter />
             </Suspense>
-            <div className="flex flex-row flex-wrap md:flex-nowrap px-48 max-md:px-12 items-center">
-                <div className="basis-1/3 max-md:basis-1/2 mx-auto">
-                    
-                    {
-                        freeExam && (
-                            <a href={`${process.env.REACT_APP_FREE_EXAM_HOST}/before-start?examId=${freeExam}`}
-                                className="btn-theme hover:bg-color-two relative btn btn-block border-0 my-8 text-xl text-white">Start Exam</a>)
-                    }
-                </div>
+            <div className="flex flex-row px-4 items-center">
+                {
+                    freeExam && (
+                        <div className="basis-full max-w-sm mx-auto relative block">
+                            <Link to={`/before-start?examId=${freeExam}`}
+                                className="font-bold block btn-hover border-0 py-3 pr-2 my-8 text-white">Start Exam
+                                <span className='btn-hover_icon'><RightArrow /></span>
+                            </Link>
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

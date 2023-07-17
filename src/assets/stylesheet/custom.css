@@ -76,6 +76,7 @@
     border-bottom: none !important;
 }
 
+
 .btn-hover {
     background: #203a4a;
     color: #fff;
@@ -121,6 +122,7 @@
 }
 
 .btn-hover_icon {
+    opacity: 1;
     position: absolute;
     transition: all .5s;
     top: 48%;
@@ -139,6 +141,7 @@
         display: none;
     }
 }
+
 
 
 /* new */

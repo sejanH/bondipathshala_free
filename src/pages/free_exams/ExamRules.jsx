@@ -1,11 +1,9 @@
 import { Suspense, lazy, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Skeleton from 'react-loading-skeleton';
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../../utils/axios";
 import BackButton from "../../components/common/BackButton";
 import backIcon from "../../assets/img/leftArrow.png";
-import ExamInfos from "../../components/common/ExamInfos";
-const LogoTopCenter = lazy(() => import("../../components/LogoTopCenter"));
+import RightArrow from '../../components/common/svg/RightArrow';
 
 const Toast = lazy(() => import("../../components/common/Toast"));
 const Modal = lazy(() => import("../../components/common/Modal"));
@@ -76,59 +74,57 @@ const ExamRules = () => {
   }
 
   return (
-    <div className="px-28 md:px-4">
-      <div className="container mx-auto pt-8 py-24">
-
-        <Suspense fallback={null}>
-          <LogoTopCenter />
-        </Suspense>
-        {/* exam content */}
-        <div className="grid grid-cols-6  mt-4">
-          <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6  ">
-            {/* exam infos */}
-            {/* {examDetails ? (<Suspense fallback={<Skeleton></Skeleton>}>
-              <ExamInfos
-                name={examDetails?.name}
-                course={examDetails?.courseId?.name}
-                subject={examDetails?.subjectId?.name}
-              />
-            </Suspense>) : (<Skeleton height={70}></Skeleton>)} */}
-
-            {/* user input box */}
-            <div className="border border-color-six mt-4 px-32 md:px-6 py-8  md:py-6 rounded-md">
-              <Suspense fallback={null}>
-                <Toast {...error} />
-              </Suspense>
-              {/* exam rules */}
-              <div className="border border-color-four px-6 py-5 rounded-md">
-                <div className="text-center text-xl text-color-one mb-4">
-                  <span className="uppercase block font-bold">
-                    Rules And Regulations
-                  </span>
-                  <span className="uppercase font-bold">(Exam Day)</span>
+    <>
+      <div className="flex flex-row bg-white text-center mb-8 ">
+        <div className='h-[68px] mx-auto'>
+          <Link to="/home">
+            <img src="/images/logo.png" alt="logo" className='w-64' />
+          </Link>
+        </div>
+      </div>
+      <div className="px-28 md:px-4">
+        <div className="max-w-3xl container mx-auto pt-8 py-24 min-h-body">
+          {/* exam content */}
+          <div className="grid grid-cols-6  mt-4">
+            <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6  ">
+             
+              {/* user input box */}
+              <div className="border border-color-six mt-4 px-6 py-8  md:py-6 rounded-md bg-white">
+                <Suspense fallback={null}>
+                  <Toast {...error} />
+                </Suspense>
+                {/* exam rules */}
+                <div className="border border-color-four px-2 py-2 rounded-md">
+                  <div className="text-center text-xl text-color-one mb-4">
+                    <span className="uppercase block font-bold">
+                      Rules And Regulations
+                    </span>
+                    <span className="uppercase font-bold">(Exam Day)</span>
+                  </div>
+                  {
+                    examRules && (<img src={`${process.env.REACT_APP_FILES_HOST}/${examRules?.ruleILink}`} />)
+                  }
                 </div>
-                {
-                  examRules && (<img src={`${process.env.REACT_APP_FILES_HOST}/${examRules?.ruleILink}`} />)
-                }
-              </div>
-              <div className="block">
-                {btnText === "Start Exam" ? (<button type="button" className="w-full text-center btn bg-color-one border-0 text-white rounded-md py-4 mt-6 mb-4" onClick={doMagic}>{btnText}</button>) :
-                  (<button type="button" className="w-full text-center btn bg-color-one border-0 text-white rounded-md py-4 mt-6 mb-4" disabled="disabled" onClick={doMagic}>{btnText}</button>)}
+                <div className="block">
+                  {btnText === "Start Exam" ? (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" onClick={doMagic}>{btnText}
+                        <span className='btn-hover_icon'><RightArrow /></span></button>) :
+                    (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" disabled="disabled" onClick={doMagic}>{btnText}                        <span className='btn-hover_icon'><RightArrow /></span></button>)}
 
+                </div>
+                <BackButton
+                  title="Back to exam page"
+                  url={`/before-start?exmId=${params.get('examId')}`}
+                  icon={backIcon}
+                />
               </div>
-              <BackButton
-                title="Back to exam page"
-                url={`/before-start?exmId=${params.get('examId')}`}
-                icon={backIcon}
-              />
             </div>
           </div>
         </div>
+        <Suspense fallback={null}>
+          <Modal {...modalData} />
+        </Suspense>
       </div>
-      <Suspense fallback={null}>
-        <Modal {...modalData} />
-      </Suspense>
-    </div>
+    </>
   );
 };
 

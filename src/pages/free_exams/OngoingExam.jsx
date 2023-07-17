@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import { useNavigate } from "react-router-dom";
 import ExamInfoDetails from "../../components/common/v2/ExamInfoDetails";
 import CountDownTwo from "../../components/common/CountDownTwo";
+import RightArrow from '../../components/common/svg/RightArrow';
 import Question from "../../components/common/Question";
 const Modal = lazy(() => import("../../components/common/Modal"));
 
@@ -25,16 +26,12 @@ const OngoingExam = () => {
   const [examData, setExamData] = useState(null);
   const [runningData, setRunningData] = useState(null);
   const [error, setError] = useState(null);
-  useEffect(() => {
-  });
 
   useEffect(() => {
-    return () => {
-      setTOKEN(sessionStorage.getItem("FREESTDNTTKN"));
-      console.log(sessionStorage.getItem("FREESTDNTTKN"));
-      if (sessionStorage.getItem("FREESTDNTTKN")) {
-        setHomeUrl("/");
-      }
+    setTOKEN(sessionStorage.getItem("FREESTDNTTKN"));
+    console.log(sessionStorage.getItem("FREESTDNTTKN"));
+    if (sessionStorage.getItem("FREESTDNTTKN")) {
+      setHomeUrl("/");
     }
   }, []);
   useEffect(() => {
@@ -138,9 +135,10 @@ const OngoingExam = () => {
               <Question question={question} index={index} key={index} handleQuestionSelect={handleQuestionSelect} />
             )) : (<Skeleton count={5} height={128}></Skeleton>)}
             {/* submit ans */}
-            <div className="text-center my-4">
-              <button className="btn-theme text-white px-28 md:px-8 py-3 rounded-md" onClick={handleSubmit}>
+            <div className="text-center my-4 max-w-sm mx-auto">
+              <button className="btn-hover text-white font-bold pr-2 py-3 rounded-md" onClick={handleSubmit}>
                 Submit Answer
+                <span className='btn-hover_icon'><RightArrow /></span>
               </button>
             </div>
           </div>
