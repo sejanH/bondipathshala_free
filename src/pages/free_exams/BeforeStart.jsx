@@ -20,7 +20,6 @@ const BeforeStart = () => {
   useEffect(() => {
     // setExamDetails(JSON.parse(sessionStorage.getItem("freeExam")));
 
-    return () => {
       if (!sessionStorage.getItem("freeExam")) {
         axios.get('/api/freestudent/getfreeexamid')
           .then(res => {
@@ -37,7 +36,6 @@ const BeforeStart = () => {
           setFreeExam(res._id);
         }
       }
-    }
   }, []);
 
   const checkNumberFunction = (e) => {
