@@ -1,9 +1,9 @@
 
-const types = {
-  1:"daily",
-  2:"weekly",
-  3:"monthly",
-};
+// const types = {
+//   1:"daily",
+//   2:"weekly",
+//   3:"monthly",
+// };
 function ExamInfoDetails({ examInfos }) {
   return (
     <div className="py-2 mx-6 text-white">
