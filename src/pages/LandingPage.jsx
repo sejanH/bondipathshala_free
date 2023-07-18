@@ -11,20 +11,19 @@ const LandingPage = () => {
         if (localStorage.getItem("STDNTTKN")) {
             window.location.href = '/home';
         }
-        return () => {
-            if (!sessionStorage.getItem("freeExam")) {
-                axios.get('/api/freestudent/getfreeexamid')
-                    .then(res => {
-                        setFreeExam(res.data?._id);
-                        sessionStorage.setItem('freeExam', JSON.stringify(res.data));
-                    }).catch(err => {
-                        console.log(err);
-                    });
-            } else {
-                const res = JSON.parse(sessionStorage.getItem("freeExam"));
-                if (res) {
-                    setFreeExam(res._id);
-                }
+
+        if (!sessionStorage.getItem("freeExam")) {
+            axios.get('/api/freestudent/getfreeexamid')
+                .then(res => {
+                    setFreeExam(res.data?._id);
+                    sessionStorage.setItem('freeExam', JSON.stringify(res.data));
+                }).catch(err => {
+                    console.log(err);
+                });
+        } else {
+            const res = JSON.parse(sessionStorage.getItem("freeExam"));
+            if (res) {
+                setFreeExam(res._id);
             }
         }
     }, []);
