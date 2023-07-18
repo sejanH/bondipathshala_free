@@ -29,7 +29,6 @@ const OngoingExam = () => {
 
   useEffect(() => {
     setTOKEN(sessionStorage.getItem("FREESTDNTTKN"));
-    console.log(sessionStorage.getItem("FREESTDNTTKN"));
     if (sessionStorage.getItem("FREESTDNTTKN")) {
       setHomeUrl("/");
     }

@@ -77,7 +77,7 @@ const ExamRules = () => {
     <>
       <div className="flex flex-row bg-white text-center mb-8 ">
         <div className='h-[68px] mx-auto'>
-          <Link to="/home">
+          <Link to="/">
             <img src="/images/logo.png" alt="logo" className='w-64' />
           </Link>
         </div>
