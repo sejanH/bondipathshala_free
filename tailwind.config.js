@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     screens: {
       sm: "640px",
@@ -14,6 +12,7 @@ module.exports = {
       "2xl": "1536px",
       web: "1440px",
       tab: "834px",
+      "tab-max":{max:"833px",min:"641px"}
     },
     fontFamily: {
       body: "Baloo Da 2",
@@ -49,15 +48,15 @@ module.exports = {
         "border-one": "#F1F1F1",
         "title-1": "#01b8fb",
         "title-2": "#f26f21",
-      }
+      },
     },
   },
   plugins: [{
     'postcss-import': {},
     'tailwindcss/nesting': 'postcss-nesting',
-    'tailwindcss': {},
-    'autoprefixer': {}
-  }, { 'autoprefixer': {} }, require("daisyui")],
+    'tailwindcss': {}
+  }, { 'autoprefixer': {} }, require('postcss-nested'),require("daisyui")],
+  // daisyUI config (optional)
   daisyui: {
     styled: true,
     themes: [
@@ -75,5 +74,4 @@ module.exports = {
       backgroundColor: ["odd"],
     },
   },
-}
-
+};
