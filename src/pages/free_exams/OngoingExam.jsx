@@ -94,11 +94,14 @@ const OngoingExam = () => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
     axios.post('/api/freestudent/submitanswer?eId=' + params.get('examId'))
       .then(({ data }) => {
-        let messageHtml = `<table class="table w-full"><tr><td>Rank: ${data.rank}</td><td>Total Marks (MCQ): ${data.totalMarksMcq}</td></tr>
-        <tr><td>Correct: ${data.totalCrrectAnswer}</td><td>Wrong: ${data.totalWrongAnswer}</td></tr>
-        <tr><td>Obtained: ${data.totalObtained}/${data.totalMarksMcq}</td><td>Not Answered: ${data.totalNotAnswered}</td></tr></table>`;
-        setError({ title: "Exam result", message: messageHtml, showHtml: true, bgColor: 'primary' })
-        let checkedModal = document.getElementById('my-modal-3')
+        // let messageHtml = `<table class="table w-full"><tr><td>Rank: ${data.rank}</td><td>Total Marks (MCQ): ${data.totalMarksMcq}</td></tr>
+        // <tr><td>Correct: ${data.totalCrrectAnswer}</td><td>Wrong: ${data.totalWrongAnswer}</td></tr>
+        // <tr><td>Obtained: ${data.totalObtained}/${data.totalMarksMcq}</td><td>Not Answered: ${data.totalNotAnswered}</td></tr></table>`;
+        // setError({ title: "Exam result", message: messageHtml, showHtml: true, bgColor: 'primary' })
+
+
+        setError({ bgColor: 'none',result:data, customWidth: 'max-w-4xl' });
+        let checkedModal = document.getElementById('my-modal-4')
         checkedModal.checked = true;
         checkedModal.addEventListener('change', (e) => {
           if (e.target.checked === false) {
