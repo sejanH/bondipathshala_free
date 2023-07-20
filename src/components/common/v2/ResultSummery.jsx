@@ -20,18 +20,24 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                             <div className="resultSummery_col">
                                 <span className="resultSummery_col_top">Total Questions</span>
                                 <span className="resultSummery_col_bottom">{result.totalMarksMcq}</span>
+                                <div className='text-center text-xl text-slate-700'>Full Marks
+                                    <span className='pl-1 font-bold text-title-2'>{result.totalMarksMcq}</span>
+                                </div>
                             </div>
                             <div className="resultSummery_col">
                                 <span className="resultSummery_col_top">Correct Answers</span>
                                 <span className="resultSummery_col_bottom">{result.totalCorrectAnswer}</span>
+                                <div className='text-center text-xl text-slate-800 font-bold'>{result.totalCorrectAnswer} x {result.marksPerMcq}</div>
                             </div>
                             <div className="resultSummery_col">
                                 <span className="resultSummery_col_top">Wrong Answers</span>
                                 <span className="resultSummery_col_bottom">{result.totalWrongAnswer}</span>
+                                <div className='text-center text-xl text-slate-800 font-bold'>({result.marksPerWrong}) x {result.totalWrongAnswer}</div>
                             </div>
                             <div className="resultSummery_col">
                                 <span className="resultSummery_col_top">Not Answered</span>
                                 <span className="resultSummery_col_bottom">{result.totalNotAnswered}</span>
+                                <div className='text-center text-xl text-slate-800 font-bold'>{result.totalNotAnswered}</div>
                             </div>
                             <div className="resultSummery_col_circle tab-max:col-span-2">
                                 <CircularProgressbarWithChildren value={percentage}
@@ -80,7 +86,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                         </div>
                         <div className='text-center p-2 text-white text-xl'>
                             <span className='py-1 px-3 btn-theme rounded-s-3xl'>Your Merit Position</span>
-                            <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{result?.rank === "-1" ? "Pending":result?.rank}</span>
+                            <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{result?.rank === "-1" ? "Pending" : result?.rank}</span>
                         </div>
                     </div>
                 </div>

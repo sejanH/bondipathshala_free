@@ -9,7 +9,7 @@ import ExamInfoDetails from "../../components/common/v2/ExamInfoDetails";
 import CountDownTwo from "../../components/common/CountDownTwo";
 import RightArrow from '../../components/common/svg/RightArrow';
 import Question from "../../components/common/Question";
-const Modal = lazy(() => import("../../components/common/Modal"));
+const Modal = lazy(() => import("../../components/common/v2/ResultSummery"));
 
 const types = {
   1: "daily exam",

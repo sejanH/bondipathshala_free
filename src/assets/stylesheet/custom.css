@@ -148,31 +148,34 @@
 /* new */
 .navBtn {
     transition: .4s ease-in-out;
+    >div{
+        justify-content: center;
+    }
 }
 
 .btnLabel {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
 }
 
 .iconImg {
-    width: 15px;
+    width: 12px;
 }
 
 .navBtn:hover {
     border-radius: 24px !important;
     background: linear-gradient(180deg, #203a4a 0%, #203a4a 100%);
+    >div{
+        justify-content: start;
+    }
 
 }
 
-.navBtn:hover .btnLabel {
-    margin-left: -20px;
-
-}
 
 .navBtn:hover .iconImg {
     position: absolute;
-    right: 15px;
+    width: 15px;
+    right: 14px;
     z-index: 2;
 
 }
@@ -183,37 +186,45 @@
 
 .navBtn:hover .circle {
     position: absolute;
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
     background: linear-gradient(180deg, #FF4B00 0%, #932000 100%);
     right: 0;
-    border-radius: 24px;
+    border-radius: 22px;
 }
 
 .active>.circle {
     position: absolute;
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
     background: linear-gradient(180deg, #FF4B00 0%, #932000 100%);
     right: 0;
-    border-radius: 24px;
+    border-radius: 22px;
 }
 
 .active .iconImg {
+    width: 15px;
     position: absolute;
-    right: 15px;
+    right: 14px;
     z-index: 2;
-
+    top: 50%;
+    transform: translateY(-55%);
 }
 
-.active .btnLabel {
-    margin-left: -20px !important;
+/* .navBtn:hover .btnLabel {
+    margin-left: -22px;
 
-}
+} */
+/* .active .btnLabel {
+    margin-left: -22px !important;
+} */
 
 .navBtn.active {
-    border-radius: 24px !important;
+    border-radius: 22px !important;
     background: #203a4a;
+    >div{
+        justify-content: start;
+    }
 }
 
 .formLabel {
