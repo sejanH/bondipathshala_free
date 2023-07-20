@@ -4,12 +4,12 @@ import cross from "../../../assets/img/icons/cross.svg";
 import 'react-circular-progressbar/dist/styles.css';
 
 function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning', customWidth = '', hideCloseBtn = false }) {
-    let percentage = (result.totalObtainedMarks / result.totalMarksMcq) * 100;
-    let wrongPercentage = (result.totalWrongMarks / result.totalMarksMcq) * 100;
+    let percentage = (result.totalCorrectMarks / result.totalMarksMcq) * 100;
+    let wrongPercentage = (result.totalWrongAnswer / result.totalMarksMcq) * 100;
     if(parseFloat(result.totalObtainedMarks) < 0){
         wrongPercentage = 100;
     }
-    let notAnsweredPercentage = (result.totalNotAnswered / result.totalMarksMcq) * 100;
+    let notAnsweredPercentage = parseFloat(100-parseFloat(percentage+wrongPercentage));
     return (
         <>
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
@@ -43,8 +43,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                 <div className='text-center text-xl text-slate-800 font-bold'>{result.totalNotAnswered}</div>
                             </div>
                             <div className="resultSummery_col_circle tab-max:col-span-2">
-                                <CircularProgressbarWithChildren value={percentage}
-                                    maxValue={result.totalMarksMcq}
+                                <CircularProgressbarWithChildren value={percentage} wrongPercentage
                                     styles={buildStyles({
                                         // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                                         strokeLinecap: 'butt',
@@ -53,7 +52,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                         // Colors
                                         pathColor: '#00e500',
                                         textColor: '#000',
-                                        trailColor: '#000',
+                                        trailColor: '#646464',
                                         border: 'none'
                                     })}
                                 >
@@ -61,7 +60,17 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                         <span className='top'>{result.totalObtainedMarks}</span>
                                         <span className='bottom'>{result.totalMarksMcq}</span>
                                     </div>
-                                    <CircularProgressbarWithChildren
+                                    <CircularProgressbar
+                                            value={wrongPercentage}
+                                            styles={buildStyles({ 
+                                                rotation: parseFloat(result.totalCorrectMarks / result.totalMarksMcq),
+                                                trailColor: "transparent",
+                                                pathColor: "#ff0000",
+                                                strokeLinecap: "butt",
+                                                border: 'none'
+                                            })}
+                                        />
+                                    {/* <CircularProgressbarWithChildren
                                         value={wrongPercentage}
                                         counterClockwise
                                         styles={buildStyles({
@@ -72,17 +81,8 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                         })}
                                     >
 
-                                        <CircularProgressbar
-                                            value={notAnsweredPercentage}
-                                            counterClockwise
-                                            styles={buildStyles({
-                                                trailColor: "transparent",
-                                                pathColor: "#646464",
-                                                strokeLinecap: "butt",
-                                                border: 'none'
-                                            })}
-                                        />
-                                    </CircularProgressbarWithChildren>
+                                        
+                                    </CircularProgressbarWithChildren> */}
                                 </CircularProgressbarWithChildren>
                                 <div className="text-3xl">Your Marks</div>
                             </div>
