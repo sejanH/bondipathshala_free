@@ -107,6 +107,9 @@ const OngoingExam = () => {
         checkedModal.checked = true;
         checkedModal.addEventListener('change', (e) => {
           if (e.target.checked === false) {
+            sessionStorage.removeItem("FREESTDNTTKN");
+            sessionStorage.removeItem("FREESTDNTID");
+            sessionStorage.removeItem("FREEEXAMID");
             navigate('/');
           }
         });
