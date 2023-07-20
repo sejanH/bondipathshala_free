@@ -10,6 +10,7 @@ import CountDownTwo from "../../components/common/CountDownTwo";
 import RightArrow from '../../components/common/svg/RightArrow';
 import Question from "../../components/common/Question";
 const Modal = lazy(() => import("../../components/common/v2/ResultSummery"));
+const Modal2 = lazy(() => import("../../components/common/Modal"));
 
 const types = {
   1: "daily exam",
@@ -26,6 +27,7 @@ const OngoingExam = () => {
   const [examData, setExamData] = useState(null);
   const [runningData, setRunningData] = useState(null);
   const [error, setError] = useState(null);
+  const [result, setResult] = useState(null);
 
   useEffect(() => {
     setTOKEN(sessionStorage.getItem("FREESTDNTTKN"));
@@ -100,7 +102,7 @@ const OngoingExam = () => {
         // setError({ title: "Exam result", message: messageHtml, showHtml: true, bgColor: 'primary' })
 
 
-        setError({ bgColor: 'none',result:data, customWidth: 'max-w-4xl' });
+        setResult({ bgColor: 'none', result: data, customWidth: 'max-w-4xl' });
         let checkedModal = document.getElementById('my-modal-4')
         checkedModal.checked = true;
         checkedModal.addEventListener('change', (e) => {
@@ -146,9 +148,11 @@ const OngoingExam = () => {
           </div>
         </div>
       </div>
-
       <Suspense fallback={null}>
-        <Modal {...error} />
+        <Modal2 {...error} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <Modal {...result} />
       </Suspense>
     </div>
   </>
