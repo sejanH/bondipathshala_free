@@ -96,7 +96,7 @@ const BeforeStart = () => {
                       type="text"
                       required
                       name="name"
-                      placeholder="Enter your name"
+                      placeholder="তোমার নাম ইংরেজিতে লিখ"
                       className="input border-2 border-title-2 focus:border-orange-600"
                     />
                   </div>
@@ -111,7 +111,7 @@ const BeforeStart = () => {
                             type="text"
                             required
                             name="sscRoll"
-                            placeholder="SSC Roll no"
+                            placeholder="তোমার SSC Roll no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
@@ -123,7 +123,7 @@ const BeforeStart = () => {
                             type="text"
                             required
                             name="sscReg"
-                            placeholder="SSC Registration no"
+                            placeholder="তোমার SSC Registration no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
@@ -141,7 +141,7 @@ const BeforeStart = () => {
                             type="text"
                             required
                             name="hscRoll"
-                            placeholder="HSC Roll no"
+                            placeholder="তোমার HSC Roll no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
@@ -153,7 +153,7 @@ const BeforeStart = () => {
                             type="text"
                             required
                             name="hscReg"
-                            placeholder="HSC Registration no"
+                            placeholder="তোমার HSC Registration no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
@@ -168,7 +168,7 @@ const BeforeStart = () => {
                       type="text"
                       required
                       name="institution"
-                      placeholder="Enter institution name"
+                      placeholder="তোমার স্কুল বা কলেজের সম্পুর্ন নাম ইংরেজিতে লিখ"
                       className="input border-2 border-title-2 focus:border-orange-600"
                     />
                   </div>
@@ -180,7 +180,7 @@ const BeforeStart = () => {
                       type="text"
                       required
                       name="mobileNo"
-                      placeholder="Enter mobile number"
+                      placeholder="তোমার মোবাইল নাম্বার লিখ"
                       className={`input border-2 ${checkNumber !== "" ? 'border-rose-600' : 'border-title-2'} focus:border-orange-600`}
                       onChange={(e) => checkNumberFunction(e)}
                     />
