@@ -27,12 +27,12 @@ const ExamRules = () => {
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
 
       Promise.all([
-        // axios.get('/api/freestudent/getexambyid?examId=' + params.get('examId')),
+        axios.get('/api/freestudent/getexambyid?examId=' + params.get('examId')),
         axios.get('/api/exam/examruleget?examId=' + params.get('examId'))
       ]).then(res => {
-        // setExamDetails(res[0].data);
-        // setExamRules(res[1].data);
-        setExamRules(res[0].data);
+        setExamDetails(res[0].data);
+        setExamRules(res[1].data);
+        // setExamRules(res[0].data);
       }).catch(err => {
         window.alert("Something went wrong, please inform us");
         console.log(err);
@@ -86,20 +86,44 @@ const ExamRules = () => {
         <div className="max-w-3xl container mx-auto pt-8 py-24 min-h-body">
           {/* exam content */}
           <div className="grid grid-cols-6  mt-4">
-            <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6  ">
-             
+            <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 headerShadow ">
+
+              <div className="flex btn-theme rounded-t-xl py-1 justify-center">
+                <span className="text-2xl font-bold capitalize text-white">{examDetails?.name} <span className="md:hidden">(Free Live Exam)</span></span>
+              </div>
               {/* user input box */}
-              <div className="border border-color-six mt-4 px-6 py-8  md:py-6 rounded-md bg-white">
+              <div className="p-4  md:py-4 rounded-e-md bg-white">
                 <Suspense fallback={null}>
                   <Toast {...error} />
                 </Suspense>
+                  <div className="flex flex-row flex-wrap justify-center mb-12 space-x-4 gap-y-4">
+                    <div className="examSummery_col">
+                      <span className="examSummery_col_top">Total Questions</span>
+                      <span className="examSummery_col_bottom">{examDetails?.totalQuestionMcq}</span>
+                    </div>
+                    <div className="examSummery_col">
+                      <span className="examSummery_col_top">Marks per Question</span>
+                      <span className="examSummery_col_bottom">{examDetails?.marksPerMcq}</span>
+                    </div>
+                    <div className="examSummery_col">
+                      <span className="examSummery_col_top">Full<br />Marks</span>
+                      <span className="examSummery_col_bottom">{examDetails?.totalMarksMcq}</span>
+                    </div>
+                    <div className="examSummery_col">
+                      <span className="examSummery_col_top">Time<br />(Minutes)</span>
+                      <span className="examSummery_col_bottom">{examDetails?.duration}</span>
+                    </div>
+                    <div className="examSummery_col">
+                      <span className="examSummery_col_top">Negative<br />Marks</span>
+                      <span className="examSummery_col_bottom">{examDetails?.negativeMarks}%</span>
+                    </div>
+                  </div>
                 {/* exam rules */}
-                <div className="border border-color-four px-2 py-2 rounded-md">
-                  <div className="text-center text-xl text-color-one mb-4">
-                    <span className="uppercase block font-bold">
-                      Rules And Regulations
+                <div className="border border-color-six px-2 py-2 rounded-md">
+                  <div className="text-center text-xl text-color-one h-7 relative">
+                    <span className="p-1 rounded-md btn-theme text-white absolute -top-7 left-[50%] -translate-x-[50%]">
+                      পরীক্ষার নিয়মাবলী
                     </span>
-                    <span className="uppercase font-bold">(Exam Day)</span>
                   </div>
                   {
                     examRules && (<img src={`${process.env.REACT_APP_FILES_HOST}/${examRules?.ruleILink}`} />)
@@ -107,7 +131,7 @@ const ExamRules = () => {
                 </div>
                 <div className="block">
                   {btnText === "Start Exam" ? (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" onClick={doMagic}>{btnText}
-                        <span className='btn-hover_icon'><RightArrow /></span></button>) :
+                    <span className='btn-hover_icon'><RightArrow /></span></button>) :
                     (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" disabled="disabled" onClick={doMagic}>{btnText}                        <span className='btn-hover_icon'><RightArrow /></span></button>)}
 
                 </div>

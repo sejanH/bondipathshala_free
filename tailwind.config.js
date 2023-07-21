@@ -12,7 +12,7 @@ module.exports = {
       "2xl": "1536px",
       web: "1440px",
       tab: "834px",
-      "tab-max":{max:"833px",min:"641px"}
+      "tab-max":{max:"833px"}
     },
     fontFamily: {
       body: "Baloo Da 2",

@@ -1,8 +1,13 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes,useLocation } from "react-router-dom";
 // import authChecker from "./utils/authChecker";
 import { pages } from "./routes";
 // authChecker();
 const App = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <div>
       <Routes>

@@ -128,8 +128,6 @@
     top: 48%;
     right: 25%;
     transform: translate(-25%, -50%);
-
-
 }
 
 @media only screen and (max-width:640px) {
@@ -140,7 +138,7 @@
     }
 
     .btn-hover_icon {
-        display: none;
+        right: 10%;
     }
 }
 
@@ -148,7 +146,8 @@
 /* new */
 .navBtn {
     transition: .4s ease-in-out;
-    >div{
+
+    >div {
         justify-content: center;
     }
 }
@@ -165,7 +164,8 @@
 .navBtn:hover {
     border-radius: 24px !important;
     background: linear-gradient(180deg, #203a4a 0%, #203a4a 100%);
-    >div{
+
+    >div {
         justify-content: start;
     }
 
@@ -222,7 +222,8 @@
 .navBtn.active {
     border-radius: 22px !important;
     background: #203a4a;
-    >div{
+
+    >div {
         justify-content: start;
     }
 }
@@ -445,44 +446,55 @@
     width: 100%;
 
     &:nth-of-type(1) {
-        .resultSummery_col_top{
+        .resultSummery_col_top {
             background-color: #203a4a;
         }
+
         .resultSummery_col_bottom {
             @apply bg-gradient-to-b from-btn-bg-top to-btn-bg-bottom;
+
             &::after {
                 box-shadow: 0 -15px 0 0 #203a4a;
             }
         }
     }
+
     &:nth-of-type(2) {
-        .resultSummery_col_top{
+        .resultSummery_col_top {
             background-color: #00e500;
         }
+
         .resultSummery_col_bottom {
             background-color: #007e00;
+
             &::after {
                 box-shadow: 0 -15px 0 0 #00e500;
             }
         }
     }
+
     &:nth-of-type(3) {
-        .resultSummery_col_top{
+        .resultSummery_col_top {
             background-color: #ff0000;
         }
+
         .resultSummery_col_bottom {
             background-color: #d00000;
+
             &::after {
                 box-shadow: 0 -15px 0 0 #ff0000;
             }
         }
     }
+
     &:nth-of-type(4) {
-        .resultSummery_col_top{
+        .resultSummery_col_top {
             background-color: #646464;
         }
+
         .resultSummery_col_bottom {
             background-color: #383838;
+
             &::after {
                 box-shadow: 0px -18px 0 0 #646464;
             }
@@ -514,6 +526,7 @@
     border-bottom-left-radius: 0.8rem;
     border-bottom-right-radius: 0.8rem;
     padding: 0rem;
+
     &::after {
         content: '';
         width: 100%;
@@ -529,22 +542,25 @@
 
 }
 
-.resultSummery_col_circle{
+.resultSummery_col_circle {
     margin: 0 auto;
     text-align: center;
 }
-.marksContainer{
+
+.marksContainer {
     position: absolute;
     font-size: 2.5rem;
     color: #203a4a;
     line-height: 2.2rem;
     font-weight: 600;
-    .top{
+
+    .top {
         position: relative;
         padding: 0 0.5rem;
         width: 100%;
         display: block;
-        &::before{
+
+        &::before {
             content: '';
             width: 100%;
             height: 3px;
@@ -554,4 +570,58 @@
             left: 0;
         }
     }
+}
+
+.examSummery_col {
+    border-radius: 0.4rem;
+    width: 30%;
+}
+
+@media only screen and (max-width:640px) {
+    .examSummery_col {
+        width:44%;
+    }
+}
+
+.examSummery_col_top {
+    background-color: #203a4a;
+    padding: 1rem 0.15rem;
+    z-index: 11;
+    line-height: 1.8rem;
+    font-size: 1.6rem;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+
+}
+
+.examSummery_col_top,
+.examSummery_col_bottom {
+    color: white;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    text-align: center;
+}
+
+.examSummery_col_bottom {
+    font-size: 2rem;
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    padding: 0rem;
+    @apply bg-gradient-to-b from-btn-bg-top to-btn-bg-bottom;
+
+    &::after {
+        content: '';
+        width: 100%;
+        height: 32px;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        overflow: hidden;
+        background-color: transparent;
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%;
+        box-shadow: 0 -15px 0 0 #203a4a;
+    }
+
 }

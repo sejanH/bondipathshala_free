@@ -12,11 +12,6 @@ import Question from "../../components/common/Question";
 const Modal = lazy(() => import("../../components/common/v2/ResultSummery"));
 const Modal2 = lazy(() => import("../../components/common/Modal"));
 
-const types = {
-  1: "daily exam",
-  2: "weekly exam",
-  3: "monthly exam",
-};
 const OngoingExam = () => {
 
   const [params] = useState(new URLSearchParams(window.location.search));
@@ -131,9 +126,9 @@ const OngoingExam = () => {
         {/* examInoDetails */}
         <div className="bg-white rounded-xl">
           {examData && (<div className="flex btn-theme rounded-t-xl py-1 justify-center">
-            <span className="text-2xl font-bold capitalize text-white">{types[examData.examType]}</span>
+            <span className="text-2xl font-bold capitalize text-white">Free Live Exam</span>
           </div>)}
-          {timer > 0 && <div className="bg-white sticky top-0">
+          {timer > 0 && <div className="bg-white sticky top-0 pb-2 z-50">
             <CountDownTwo date={timer} completedAction={handleSubmit} />
           </div>}
           {examData && <ExamInfoDetails examInfos={examData} />}
