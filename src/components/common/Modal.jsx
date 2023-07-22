@@ -4,7 +4,7 @@ const Modal = ({ title = 'Notice!', message , showHtml = false, bgColor='warning
     return (
         <>
             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-            <div className="modal modal-middle modal-bottom">
+            <div className="modal modal-middle">
                 <div className={`modal-box relative bg-${bgColor} ${customWidth}`}>
                     {!hideCloseBtn && (<label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>)}
                     <h3 className="text-lg font-bold md:mt-2">{title}</h3>

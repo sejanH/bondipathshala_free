@@ -7,6 +7,7 @@ import FreeBeforeStart from './pages/free_exams/BeforeStart';
 import FreeExamRules from './pages/free_exams/ExamRules';
 import FreeOngoingExam from './pages/free_exams/OngoingExam';
 import LandingPage from "./pages/LandingPage";
+import Result from "./pages/free_exams/Result";
 
 export const pages = [
   {
@@ -27,6 +28,10 @@ export const pages = [
       {
         path:"/ongoing",
         element: FreeOngoingExam,
+      },
+      {
+        path:"/result",
+        element: Result,
       }
     ],
   },
