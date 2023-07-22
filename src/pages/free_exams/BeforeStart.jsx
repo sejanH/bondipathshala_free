@@ -4,7 +4,7 @@ import axios from "../../utils/axios";
 import { useNavigate, Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import RightArrow from '../../components/common/svg/RightArrow';
-import backIcon from "../../assets/img/leftArrow.png";
+import backIcon from "../../assets/img/icons/leftArrow.svg";
 const Modal = lazy(() => import("../../components/common/Modal"));
 //start exam => updtestudent
 const BeforeStart = () => {
