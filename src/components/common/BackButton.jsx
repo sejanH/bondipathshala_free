@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import backIcon from "../../assets/img/leftArrow.png";
 function BackButton({ title, icon = { backIcon }, url = "/" }) {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center btn-hover-left">
       <Link to={url} >
-        <div className="text-center text-btn-bg-top inline-flex space-x-2 items-center ">
-          <img src={icon} className="w-4 h-[10px]" alt="BackButtonIcon" />{" "}
+        <div className="text-center inline-flex space-x-2 items-center py-3">
+          <img src={icon} className="btn-hover_icon_left" alt="BackButtonIcon" />{" "}
           <span>{title}</span>
         </div>
       </Link>
