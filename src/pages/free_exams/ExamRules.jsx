@@ -2,7 +2,7 @@ import { Suspense, lazy, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../utils/axios";
 import BackButton from "../../components/common/BackButton";
-import backIcon from "../../assets/img/leftArrow.png";
+import backIcon from "../../assets/img/icons/leftArrow.svg";
 import RightArrow from '../../components/common/svg/RightArrow';
 
 const Toast = lazy(() => import("../../components/common/Toast"));
