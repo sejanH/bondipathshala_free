@@ -57,7 +57,7 @@ const Result = () => {
                 </div>
             </div>
             <div className="px-28 md:px-4">
-                <div className="pb-8 container mx-auto max-w-4xl">
+                <div className="pb-8 container mx-auto max-w-4xl min-h-body">
                     <div className="bg-white rounded-xl">
                         <div className="p-6">
                             <div className="flex flex-row md:flex-wrap">
