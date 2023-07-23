@@ -63,7 +63,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                             value={wrongPercentage == 100?result.totalMarksMcq:result.totalWrongAnswer}
                                             maxValue={parseInt(result.totalMarksMcq/result.marksPerMcq)}
                                             styles={buildStyles({ 
-                                                rotation: wrongPercentage ==100 ? 0 :parseFloat(result.totalCorrectAnswer / result.totalMarksMcq),
+                                                rotation: wrongPercentage ==100 ? 0 :parseFloat(result.totalCorrectAnswer /*/ result.totalMarksMcq*/),
                                                 trailColor: "transparent",
                                                 pathColor: "#ff0000",
                                                 strokeLinecap: "butt",
