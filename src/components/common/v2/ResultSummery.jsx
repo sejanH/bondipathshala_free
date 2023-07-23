@@ -42,7 +42,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                             </div>
                             <div className="resultSummery_col_circle tab-max:col-span-2">
                             <CircularProgressbarWithChildren value={wrongPercentage == 100?0:result.totalCorrectAnswer}
-                            maxValue={result.totalMarksMcq}
+                            maxValue={parseInt(result.totalMarksMcq/result.marksPerMcq)}
                                     styles={buildStyles({
                                         // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                                         strokeLinecap: 'butt',
