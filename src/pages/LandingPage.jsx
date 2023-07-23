@@ -9,10 +9,9 @@ const LogoTopCenter = lazy(() => import("../components/LogoTopCenter"));
 const LandingPage = () => {
     const [freeExam, setFreeExam] = useState(null);
     useEffect(() => {
-        if (localStorage.getItem("STDNTTKN")) {
-            window.location.href = '/home';
-        }
-
+        sessionStorage.removeItem("FREESTDNTTKN");
+        sessionStorage.removeItem("FREESTDNTID");
+        sessionStorage.removeItem("FREEEXAMID");
         if (!sessionStorage.getItem("freeExam")) {
             axios.get('/api/freestudent/getfreeexamid')
                 .then(res => {
@@ -32,13 +31,13 @@ const LandingPage = () => {
     return (
         <div className="container mx-auto min-h-without-footer items-center py-[60px]">
             <Suspense fallback={null}>
-                <LogoTopCenter maxWidth='max-w-xs mx-auto'/>
+                <LogoTopCenter maxWidth='max-w-xs mx-auto' />
             </Suspense>
             <div className="flex flex-row px-4 pt-8 items-center">
                 {
                     freeExam && (
                         <div className="basis-full max-w-md mx-auto relative block">
-                            <ExamCardTwo exam={freeExam} freeExam={true}/>
+                            <ExamCardTwo exam={freeExam} freeExam={true} />
                             {/* <Link to={`/before-start?examId=${freeExam}`}
                                 className="font-bold block btn-hover border-0 py-3 pr-2 my-8 text-white">Start Exam
                                 <span className='btn-hover_icon'><RightArrow /></span>

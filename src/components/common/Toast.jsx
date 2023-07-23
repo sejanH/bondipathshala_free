@@ -1,6 +1,6 @@
 const Toast = ({message, cssClass,position='top',alignment='end'}) => {
     return (<>
-        {message && (<div className={`toast toast-${position} toast-${alignment}`}>
+        {message && (<div className={`z-50 toast toast-${position} toast-${alignment}`}>
             <div className={`alert alert-${cssClass}`}>
                 <div>
                     <span>{message}</span>

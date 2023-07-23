@@ -20,7 +20,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                         <div className="grid tab:grid-cols-5 grid-flow-rows gap-x-4 tab-max:grid-cols-2 sm-min:grid-cols-2 gap-y-4 place-content-center resultSummery">
                             <div className="resultSummery_col">
                                 <span className="resultSummery_col_top">Total Questions</span>
-                                <span className="resultSummery_col_bottom">{result.totalMarksMcq}</span>
+                                <span className="resultSummery_col_bottom">{result.totalMarksMcq/result.marksPerMcq}</span>
                                 <div className='text-center text-xl text-slate-700'>Full Marks
                                     <span className='pl-1 font-bold text-title-2'>{result.totalMarksMcq}</span>
                                 </div>
