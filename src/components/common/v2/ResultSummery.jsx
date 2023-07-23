@@ -61,7 +61,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                     </div>
                                     <CircularProgressbar
                                             value={wrongPercentage == 100?result.totalMarksMcq:result.totalWrongAnswer}
-                                            maxValue={result.totalMarksMcq}
+                                            maxValue={parseInt(result.totalMarksMcq/result.marksPerMcq)}
                                             styles={buildStyles({ 
                                                 rotation: wrongPercentage ==100 ? 0 :parseFloat(result.totalCorrectAnswer / result.totalMarksMcq),
                                                 trailColor: "transparent",
