@@ -5,9 +5,10 @@ import 'react-circular-progressbar/dist/styles.css';
 
 function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning', customWidth = '', hideCloseBtn = false }) {
     let wrongPercentage = (result.totalWrongAnswer / result.totalMarksMcq) * 100;
-    if(parseFloat(result.totalObtainedMarks) < 0){
+    if(parseFloat(result.totalObtainedMarks) <= 0){
         wrongPercentage = 100;
     }
+    const noOfQuestions = parseInt(result.totalMarksMcq/result.marksPerMcq);
     return (
         <>
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
@@ -42,7 +43,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                             </div>
                             <div className="resultSummery_col_circle tab-max:col-span-2">
                             <CircularProgressbarWithChildren value={wrongPercentage == 100?0:result.totalCorrectAnswer}
-                            maxValue={parseInt(result.totalMarksMcq/result.marksPerMcq)}
+                            maxValue={noOfQuestions}
                                     styles={buildStyles({
                                         // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                                         strokeLinecap: 'butt',
@@ -60,27 +61,16 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                         <span className='bottom'>{result.totalMarksMcq}</span>
                                     </div>
                                     <CircularProgressbar
-                                            value={wrongPercentage == 100?result.totalMarksMcq:result.totalWrongAnswer}
-                                            maxValue={parseInt(result.totalMarksMcq/result.marksPerMcq)}
+                                            value={wrongPercentage == 100?noOfQuestions:result.totalWrongAnswer}
+                                            maxValue={noOfQuestions}
                                             styles={buildStyles({ 
-                                                rotation: wrongPercentage ==100 ? 0 :parseFloat(result.totalCorrectAnswer /*/ result.totalMarksMcq*/),
+                                                rotation: wrongPercentage ==100 ? 0 : parseFloat(result.totalCorrectAnswer/ noOfQuestions),
                                                 trailColor: "transparent",
                                                 pathColor: "#ff0000",
                                                 strokeLinecap: "butt",
                                                 border: 'none'
                                             })}
                                         />
-                                    {/* <CircularProgressbarWithChildren
-                                        value={wrongPercentage}
-                                        counterClockwise
-                                        styles={buildStyles({
-                                            trailColor: "transparent",
-                                            pathColor: "#ff0000",
-                                            strokeLinecap: "butt",
-                                            border: 'none'
-                                        })}
-                                    >                                        
-                                    </CircularProgressbarWithChildren> */}
                                 </CircularProgressbarWithChildren>
                                 <div className="text-3xl">Your Marks</div>
                             </div>
