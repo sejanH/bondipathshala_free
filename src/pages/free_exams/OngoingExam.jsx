@@ -160,8 +160,8 @@ const OngoingExam = () => {
            You have already completed the exam!    
           </h3>
             <p className="text-center text-2xl font-bold text-green-500">Best Wishes!</p>
-          <div className="modal-action flex justify-right ">
-            <label htmlFor="pop-up-modal" className="btn bg-[red] text-white">
+          <div className="modal-action flex justify-right mb-1 ">
+            <label htmlFor="pop-up-modal" className="btn bg-red-600 text-white">
               Close
             </label>
           </div>
