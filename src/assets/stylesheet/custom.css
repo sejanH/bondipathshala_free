@@ -509,11 +509,11 @@
         }
 
         .resultSummery_col_bottom {
-            @apply bg-gradient-to-b from-btn-bg-top to-btn-bg-bottom;
-
+            
             &::after {
                 box-shadow: 0 -15px 0 0 #203a4a;
             }
+            @apply bg-gradient-to-b from-btn-bg-top to-btn-bg-bottom;
         }
     }
 
