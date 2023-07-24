@@ -20,6 +20,7 @@ const OngoingExam = () => {
   const [TOKEN, setTOKEN] = useState(null);
   const [timer, setTimer] = useState(0);
   const [examData, setExamData] = useState(null);
+  const [exam,setExam] = useState({});
   const [runningData, setRunningData] = useState(null);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
@@ -59,7 +60,7 @@ const OngoingExam = () => {
             setError({ title: "Can't start now", message: "Exam has ended" });
             axios.get(`/api/freestudent/getexambyid?examId=${params.get('examId')}`).then(({data})=>{
               console.log(data);
-              setExamData(data.examData)
+              setExam(data.examData)
               openModal();
             })
             
@@ -153,7 +154,7 @@ const OngoingExam = () => {
     <div className="modal modal-middle">    
         <div className="modal-box">
           <div className="title h-10 bg-orange-600 text-white text-center">
-            <p className="font-bold text-center">{examData.name}</p>
+            <p className="font-bold text-center">{exam.name}</p>
           </div>
           <h3 className="font-bold text-lg text-center my-6 text-red-600">
            You have already completed the exam!    
