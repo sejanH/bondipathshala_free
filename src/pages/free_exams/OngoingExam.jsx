@@ -153,15 +153,15 @@ const OngoingExam = () => {
     <input type="checkbox" id="pop-up-modal" className="modal-toggle" />
     <div className="modal modal-middle">    
         <div className="modal-box">
-          <div className="title h-10 bg-orange-600 text-white text-center">
-            <p className="font-bold text-center">{exam.name}</p>
+          <div className="title h-10 bg-orange-600 text-white text-center flex items-center justify-center ">
+            <p className="font-bold">{exam.name}</p>
           </div>
-          <h3 className="font-bold text-lg text-center my-6 text-red-600">
+          <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
            You have already completed the exam!    
           </h3>
-            <p className="text-center font-semibold text-green-500">Best Wishes!</p>
+            <p className="text-center text-2xl font-bold text-green-500">Best Wishes!</p>
           <div className="modal-action flex justify-right ">
-            <label htmlFor="pop-up-modal" className="btn bg-[red]">
+            <label htmlFor="pop-up-modal" className="btn bg-[red] text-white">
               Close
             </label>
           </div>
