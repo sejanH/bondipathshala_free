@@ -108,7 +108,6 @@ const Result = () => {
           <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
               No Student found!   
           </h3>
-            <p className="text-center text-2xl font-bold text-green-500">Best Wishes!</p>
           <div className="modal-action flex justify-right mb-1 ">
             <label htmlFor="pop-up-modal" className="btn bg-red-600 text-white">
               Close
