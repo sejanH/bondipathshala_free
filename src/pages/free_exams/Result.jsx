@@ -72,7 +72,7 @@ const Result = () => {
                     <div className="bg-white rounded-xl">
                         <div className="p-6">
                             <div className="flex flex-row md:flex-wrap">
-                                <select className="md:my-1 lg:mx-1 basis-1/2 select select-bordered md:basis-full" defaultValue={examId} onChange={(e) => setexamId(e.target.value)}>
+                                <select className="md:my-1 lg:mx-1 basis-1/2 select select-bordered md:basis-full" value={examId} onChange={(e) => setexamId(e.target.value)}>
                                     <option value="">Select the exam</option>
 
                                     {
