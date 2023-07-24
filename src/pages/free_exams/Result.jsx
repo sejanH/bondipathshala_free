@@ -10,8 +10,8 @@ const Result = () => {
 
     const [freeExams, setFreeExams] = useState();
     const [error, setError] = useState(null);
-    const [examId, setexamId] = useState(null);
-    const [mobileNo, setmobileNo] = useState(null);
+    const [examId, setexamId] = useState("");
+    const [mobileNo, setmobileNo] = useState("");
     const [resultDetails, setResultDetails] = useState();
 
     useEffect(() => {
@@ -24,28 +24,39 @@ const Result = () => {
             })
     }, []);
 
-    const checkNumberFunction = (e) => {
+    const checkNumberFunction = (value) => {
 
         const reg = /^(01[3-9]\d{8})$/;
-        let valid_number = reg.test(e.target.value);
-        if (valid_number) {
-            setmobileNo(e.target.value);
-        }
+        let valid_number = reg.test(value);
+        return valid_number;
     }
 
     const handleSubmit = () => {
-        axios.get(`/api/freestudent/getrankfree?examId=${examId}&mobileNo=${mobileNo}`)
-            .then(({ data }) => {
-                setResultDetails({ bgColor: 'none', result: data, customWidth: 'max-w-4xl' });
-                let checkedModal = document.getElementById('my-modal-4')
-                checkedModal.checked = true;
-            }).catch(err => {
-                console.log(err);
-                setError({message:err.response.data});
+        if (checkNumberFunction(mobileNo)) {
+            axios.get(`/api/freestudent/getrankfree?examId=${examId}&mobileNo=${mobileNo}`)
+                .then(({ data }) => {
+                    setResultDetails({ bgColor: 'none', result: data, customWidth: 'max-w-4xl' });
+                    let checkedModal = document.getElementById('my-modal-4')
+                    checkedModal.checked = true;
+                    checkedModal.addEventListener('change', (e) => {
+                        if (e.target.checked === false) {
+                            setexamId("");
+                            setmobileNo("");
+                        }
+                    });
+                }).catch(err => {
+                    console.log(err);
+                    setError({ message: err.response.data });
 
-                let checkedModal = document.getElementById('my-modal-3')
-                checkedModal.checked = true;
-            })
+                    let checkedModal = document.getElementById('my-modal-3')
+                    checkedModal.checked = true;
+                });
+        } else {
+            setError({ message: "Number not valid" });
+
+            let checkedModal = document.getElementById('my-modal-3')
+            checkedModal.checked = true;
+        }
     }
     return (
         <>
@@ -61,18 +72,18 @@ const Result = () => {
                     <div className="bg-white rounded-xl">
                         <div className="p-6">
                             <div className="flex flex-row md:flex-wrap">
-                                <select className="md:my-1 lg:mx-1 basis-1/2 select select-bordered md:basis-full" defaultValue="" onChange={(e) => setexamId(e.target.value)}>
-                                    <option disabled selected>Select the exam</option>
+                                <select className="md:my-1 lg:mx-1 basis-1/2 select select-bordered md:basis-full" defaultValue={examId} onChange={(e) => setexamId(e.target.value)}>
+                                    <option value="">Select the exam</option>
 
                                     {
                                         freeExams?.map((d, i) => (<option key={i} value={d._id}>{d.name}</option>))
                                     }
 
                                 </select>
-                                <input type="text" placeholder="তোমার মোবাইল নাম্বার লিখ" className="md:my-1 lg:mx-1 basis-1/2 input input-bordered md:basis-full" onChange={(e) => checkNumberFunction(e)} />
+                                <input type="text" placeholder="তোমার মোবাইল নাম্বার লিখ" className="md:my-1 lg:mx-1 basis-1/2 input input-bordered md:basis-full" value={mobileNo} onChange={(e) => setmobileNo(e.target.value)} />
                             </div>
                             <div className="text-center my-4 max-w-sm mx-auto">
-                                <button className="btn-hover text-white font-bold pr-2 py-3 rounded-md disabled:bg-slate-300" disabled={!examId || !mobileNo} onClick={handleSubmit}>
+                                <button className="btn-hover text-white font-bold pr-2 py-3 rounded-md disabled:bg-slate-300" disabled={examId == "" || !mobileNo} onClick={handleSubmit}>
                                     Get Result
                                     <span className='btn-hover_icon'><RightArrow /></span>
                                 </button>
