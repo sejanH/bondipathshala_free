@@ -58,18 +58,21 @@ const OngoingExam = () => {
           } else {
             setError({ title: "Can't start now", message: "Exam has ended" });
             axios.get(`/api/freestudent/getexambyid?examId=${params.get('examId')}`).then(({data})=>{
-              let checkedModal = document.getElementById('pop-up-modal')
-              checkedModal.checked = true;
+              console.log(data.examData);
               setExamData(data.examData)
+              openModal();
             })
             
 
           }
         })
     }
-  }, [TOKEN, params.get('examId')]);
+  }, [TOKEN,navigate,params]);
 
-
+  function openModal(){
+    let checkedModal = document.getElementById('pop-up-modal')
+    checkedModal.checked = true;
+  }
   const handleQuestionSelect = (event, activeQuestion) => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
     axios.put('/api/freestudent/updatequestion', {
@@ -77,7 +80,7 @@ const OngoingExam = () => {
       questionIndexNumber: activeQuestion,
       optionIndexNumber: event.target.value
     }).then(({ data }) => {
-      if (data == "Ok") {
+      if (data === "Ok") {
         let all = runningData;
         all[activeQuestion].answeredOption = event.target.value;
         setRunningData([...all]);
