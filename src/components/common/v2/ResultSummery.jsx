@@ -5,10 +5,14 @@ import 'react-circular-progressbar/dist/styles.css';
 
 function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning', customWidth = '', hideCloseBtn = false }) {
     let wrongPercentage = (result.totalWrongAnswer / result.totalMarksMcq) * 100;
-    if(parseFloat(result.totalObtainedMarks) <= 0){
+    if(parseFloat(result.totalObtainedMarks) < 0){
         wrongPercentage = 100;
     }
     const noOfQuestions = parseInt(result.totalMarksMcq/result.marksPerMcq);
+    let myRank = result?.rank;
+    if(typeof result.totalStudent != "undefined"){
+        myRank = result.rank+'/'+result.totalStudent;
+    }
     return (
         <>
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
@@ -77,7 +81,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                         </div>
                         <div className='text-center p-2 text-white text-xl'>
                             <span className='py-1 px-3 btn-theme rounded-s-3xl'>Your Merit Position</span>
-                            <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{result?.rank == "-1" ? "Pending" : result?.rank}</span>
+                            <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{result?.rank == "-1" ? "Pending" : myRank}</span>
                         </div>
                     </div>
                 </div>
