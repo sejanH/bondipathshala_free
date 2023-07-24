@@ -57,9 +57,12 @@ const OngoingExam = () => {
               })
           } else {
             setError({ title: "Can't start now", message: "Exam has ended" });
-            axios.get(`/api/freestudent/getexambyid?examId=${params.get('examId')}`).then(({data})=>setExamData(data.examData))
-            let checkedModal = document.getElementById('pop-up-modal')
-            checkedModal.checked = true;
+            axios.get(`/api/freestudent/getexambyid?examId=${params.get('examId')}`).then(({data})=>{
+              let checkedModal = document.getElementById('pop-up-modal')
+              checkedModal.checked = true;
+              setExamData(data.examData)
+            })
+            
 
           }
         })
@@ -144,8 +147,7 @@ const OngoingExam = () => {
       </Suspense>
     </div>
     <input type="checkbox" id="pop-up-modal" className="modal-toggle" />
-    <div className="modal modal-middle">
-    
+    <div className="modal modal-middle">    
         <div className="modal-box">
           <div className="title h-10 bg-orange-600 text-white text-center">
             <p className="font-bold text-center">{examData.name}</p>
