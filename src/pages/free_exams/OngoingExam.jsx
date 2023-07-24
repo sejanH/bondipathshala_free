@@ -152,8 +152,8 @@ const OngoingExam = () => {
     </div>
     <input type="checkbox" id="pop-up-modal" className="modal-toggle" />
     <div className="modal modal-middle">    
-        <div className="modal-box">
-          <div className="title h-10 bg-orange-600 text-white text-center flex items-center justify-center ">
+        <div className="modal-box pb-0">
+          <div className="my-0 py-0 h-10 bg-orange-600 text-white text-center flex items-center justify-center ">
             <p className="font-bold">{exam.name}</p>
           </div>
           <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
