@@ -58,7 +58,7 @@ const OngoingExam = () => {
           } else {
             setError({ title: "Can't start now", message: "Exam has ended" });
             axios.get(`/api/freestudent/getexambyid?examId=${params.get('examId')}`).then(({data})=>{
-              console.log(data.examData);
+              console.log(data);
               setExamData(data.examData)
               openModal();
             })
@@ -166,6 +166,7 @@ const OngoingExam = () => {
           </div>
         </div>
       </div>
+    
   </>
   );
 };
