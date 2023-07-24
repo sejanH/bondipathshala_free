@@ -59,6 +59,9 @@ const Result = () => {
             openModal();
         }
     }
+    const doAction = ()=>{
+        window.location.reload(false);
+    }
     return (
         <>
             <div className="flex flex-row bg-white text-center mb-8">
@@ -109,7 +112,7 @@ const Result = () => {
               No Student found!   
           </h3>
           <div className="modal-action flex justify-right mb-1 ">
-            <label htmlFor="pop-up-modal" className="btn bg-red-600 text-white">
+            <label htmlFor="pop-up-modal" onClick={()=>doAction()} className="btn bg-red-600 text-white">
               Close
             </label>
           </div>
