@@ -55,8 +55,11 @@ module.exports = {
   plugins: [{
     'postcss-import': {},
     'tailwindcss/nesting': 'postcss-nesting',
-    'tailwindcss': {}
-  }, { 'autoprefixer': {} }, require('postcss-nested'),require("daisyui")],
+    'tailwindcss': {},
+    'postcss-preset-env': {
+      features: { 'nesting-rules': false },
+    }
+  }, { 'autoprefixer': {} }, require('postcss-nested'),require("daisyui"),require('autoprefixer')],
   // daisyUI config (optional)
   daisyui: {
     styled: true,
