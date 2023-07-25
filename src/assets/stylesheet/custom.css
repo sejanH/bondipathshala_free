@@ -466,11 +466,17 @@
 
     &:has(.custom-radio:checked) {
         background-color: #F54B03;
+        .optionValue{
+            color: white;
+        }
     }
 
     &:has(.custom-radio:disabled) {
         background-color: rgb(194, 188, 188);
         cursor: not-allowed;
+    }
+    .optionValue{
+        padding-left: 0.5rem;
     }
 }
 
