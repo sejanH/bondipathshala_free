@@ -476,6 +476,7 @@
 /** custom radio
 * border-orange-400 
  */
+
 .custom-label {
     background-color: #eaeaeaff;
 }
@@ -484,7 +485,7 @@
     background-color: #F54B03;
 }
 
-.custom-label:has(.custom-radio:checked)+.optionValue {
+.custom-label:has(.custom-radio:checked) .optionValue {
     color: white;
 }
 
@@ -501,13 +502,14 @@
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     /* Remove most all native input styles */
+    -moz-appearance: none;
     appearance: none;
     height: 20px;
     width: 20px;
     position: relative;
 }
 
-.custom-radio::before {
+.custom-radio:before {
     position: absolute;
     content: '';
     height: 20px;
@@ -520,6 +522,7 @@
     background-color: #fff;
     border-radius: 50%;
 }
+
 
 .resultSummery_col {
     border-radius: 0.4rem;
