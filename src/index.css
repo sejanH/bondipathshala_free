@@ -71,6 +71,9 @@
     justify-content: center;
     align-content: center;
 }
+.modal::after {
+    display: none;
+}
 /* Body */
 .bgdotted {
     position: relative;

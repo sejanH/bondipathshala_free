@@ -28,7 +28,7 @@ const Modal = ({ title = 'Notice!', message, showHtml = false, bgColor = 'warnin
             <div className="text-right">
                 <h3 className="text-lg font-bold md:mt-2">{title}</h3>
                 <button onClick={closeModal}>
-                    <img className="w-6 h-6" src={cross} />
+                    <img className="w-6 h-6" src={cross} alt='x' />
                 </button>
             </div>
             <div className={customWidth}>
