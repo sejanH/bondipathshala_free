@@ -16,8 +16,8 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
     return (
         <>
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-            {
-                result.examName && (
+            {/* {
+                result.examName && ( */}
                     <div className="modal modal-middle">
                         <div className={`modal-box rounded-2xl p-0 relative bg-${bgColor} ${customWidth}`}>
                             <h3 className="text-3xl font-bold py-1 text-center text-white bg-title-2">{title}</h3>
@@ -88,8 +88,8 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                             </div>
                         </div>
                     </div>
-                )
-            }
+                {/* )
+            } */}
         </>
     )
 }

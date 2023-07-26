@@ -39,5 +39,11 @@ module.exports = {
       new HtmlWebpackPlugin({
           template: path.join(__dirname, 'public', 'index.html'),
       }),
+      require('postcss-import'),
+    require('tailwindcss/nesting')(require('postcss-nesting')),
+    require('autoprefixer'),
+    require('tailwindcss'),
+    require("daisyui"),
+    require('autoprefixer')
   ],
 }
