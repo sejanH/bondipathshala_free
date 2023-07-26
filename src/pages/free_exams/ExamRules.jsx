@@ -20,7 +20,7 @@ const ExamRules = () => {
   const [modalData, setModalData] = useState("Start Exam");
   useEffect(() => {
     setTOKEN(sessionStorage.getItem("FREESTDNTTKN"));
-  });
+  },[params.get('examId')]);
 
   useEffect(() => {
     if (TOKEN) {

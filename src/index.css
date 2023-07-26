@@ -70,6 +70,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+    top: 0 !important;
 }
 .modal::after {
     display: none;

@@ -87,7 +87,7 @@ const Result = () => {
                                 <input type="text" placeholder="তোমার মোবাইল নাম্বার লিখ" className="md:my-1 lg:mx-1 basis-1/2 input input-bordered md:basis-full" value={mobileNo} onChange={(e) => setmobileNo(e.target.value)} />
                             </div>
                             <div className="text-center my-4 max-w-sm mx-auto">
-                                <button className="btn-hover text-white font-bold pr-2 py-3 rounded-md disabled:bg-slate-300" disabled={examId == "" || !mobileNo} onClick={handleSubmit}>
+                                <button className="btn-hover text-white font-bold pr-2 py-3 rounded-md disabled:bg-slate-300" disabled={examId === "" || !mobileNo} onClick={handleSubmit}>
                                     Get Result
                                     <span className='btn-hover_icon'><RightArrow /></span>
                                 </button>

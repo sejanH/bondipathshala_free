@@ -67,10 +67,10 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                                 <span className='bottom'>{result.totalMarksMcq}</span>
                                             </div>
                                             <CircularProgressbar
-                                                value={wrongPercentage == 100 ? noOfQuestions : result.totalWrongAnswer}
+                                                value={wrongPercentage === 100 ? noOfQuestions : result.totalWrongAnswer}
                                                 maxValue={noOfQuestions}
                                                 styles={buildStyles({
-                                                    rotation: wrongPercentage == 100 ? 0 : parseFloat(result.totalCorrectAnswer / noOfQuestions),
+                                                    rotation: wrongPercentage === 100 ? 0 : parseFloat(result.totalCorrectAnswer / noOfQuestions),
                                                     trailColor: "transparent",
                                                     pathColor: "#ff0000",
                                                     strokeLinecap: "butt",
@@ -83,7 +83,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                 </div>
                                 <div className='text-center p-2 text-white text-xl'>
                                     <span className='py-1 px-3 btn-theme rounded-s-3xl'>Your Merit Position</span>
-                                    <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{result?.rank == "-1" ? "Pending" : myRank}</span>
+                                    <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{parseInt(result?.rank) === -1 ? "Pending" : myRank}</span>
                                 </div>
                             </div>
                         </div>
