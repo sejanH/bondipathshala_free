@@ -96,24 +96,24 @@ const ExamRules = () => {
                 <Suspense fallback={null}>
                   <Toast {...error} />
                 </Suspense>
-                  <div className="flex flex-row flex-wrap justify-center mb-12 space-x-4 gap-y-4">
-                    <div className="examSummery_col">
+                  <div className="flex flex-row flex-wrap justify-center mb-12 space-x-4">
+                    <div className="examSummery_col py-2">
                       <span className="examSummery_col_top">Total Questions</span>
                       <span className="examSummery_col_bottom">{examDetails?.totalQuestionMcq}</span>
                     </div>
-                    <div className="examSummery_col">
+                    <div className="examSummery_col py-2">
                       <span className="examSummery_col_top">Marks per Question</span>
                       <span className="examSummery_col_bottom">{examDetails?.marksPerMcq}</span>
                     </div>
-                    <div className="examSummery_col">
+                    <div className="examSummery_col py-2">
                       <span className="examSummery_col_top">Full<br />Marks</span>
                       <span className="examSummery_col_bottom">{examDetails?.totalMarksMcq}</span>
                     </div>
-                    <div className="examSummery_col">
+                    <div className="examSummery_col py-2">
                       <span className="examSummery_col_top">Time<br />(Minutes)</span>
                       <span className="examSummery_col_bottom">{examDetails?.duration}</span>
                     </div>
-                    <div className="examSummery_col">
+                    <div className="examSummery_col py-2">
                       <span className="examSummery_col_top">Negative<br />Marks</span>
                       <span className="examSummery_col_bottom">{examDetails?.negativeMarks}%</span>
                     </div>

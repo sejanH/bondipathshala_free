@@ -65,10 +65,11 @@
 }
 
 /* react modal */
-/* .ReactModal__Content--after-open {
-    @apply w-1/2 md:w-11/12;
-} */
-
+.modal{
+    display: flex !important;
+    flex: 1 1 auto;
+    justify-content: center;
+}
 /* Body */
 .bgdotted {
     position: relative;

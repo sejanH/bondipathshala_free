@@ -30,10 +30,10 @@ const Result = () => {
         let valid_number = reg.test(value);
         return valid_number;
     }
-    function openModal(){
+    function openModal() {
         let checkedModal = document.getElementById('pop-up-modal')
         checkedModal.checked = true;
-      }
+    }
     const handleSubmit = () => {
         if (checkNumberFunction(mobileNo)) {
             axios.get(`/api/freestudent/getrankfree?examId=${examId}&mobileNo=${mobileNo}`)
@@ -59,7 +59,7 @@ const Result = () => {
             openModal();
         }
     }
-    const doAction = ()=>{
+    const doAction = () => {
         window.location.reload(false);
     }
     return (
@@ -95,29 +95,29 @@ const Result = () => {
                         </div>
                     </div>
                 </div>
-                <Suspense fallback={null}>
-                    <Modal2 {...error} />
-                </Suspense>
-                <Suspense fallback={null}>
-                    <Modal {...resultDetails} />
-                </Suspense>
             </div>
+            <Suspense fallback={null}>
+                <Modal2 {...error} />
+            </Suspense>
+            <Suspense fallback={null}>
+                <Modal {...resultDetails} />
+            </Suspense>
             <input type="checkbox" id="pop-up-modal" className="modal-toggle" />
-    <div className="modal modal-middle">    
-        <div className="modal-box pb-0">
-          <div className="my-0 py-0 h-10 bg-orange-600 text-white text-center flex items-center justify-center ">
-            <p className="font-bold">Notice</p>
-          </div>
-          <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
-              No Student found!   
-          </h3>
-          <div className="modal-action flex justify-right mb-1 ">
-            <label htmlFor="pop-up-modal" onClick={()=>doAction()} className="btn bg-red-600 text-white">
-              Close
-            </label>
-          </div>
-        </div>
-      </div>
+            <div className="modal modal-middle">
+                <div className="modal-box pb-0">
+                    <div className="my-0 py-0 h-10 bg-orange-600 text-white text-center flex items-center justify-center ">
+                        <p className="font-bold">Notice</p>
+                    </div>
+                    <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
+                        No Student found!
+                    </h3>
+                    <div className="modal-action flex justify-right mb-1 ">
+                        <label htmlFor="pop-up-modal" onClick={() => doAction()} className="btn bg-red-600 text-white">
+                            Close
+                        </label>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

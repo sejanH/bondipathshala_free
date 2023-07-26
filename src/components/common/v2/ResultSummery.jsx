@@ -18,7 +18,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
             {/* {
                 result.examName && ( */}
-                    <div className="modal modal-middle">
+                    <div className="modal overflow-y-scroll flex-wrap modal-middle">
                         <div className={`modal-box rounded-2xl p-0 relative bg-${bgColor} ${customWidth}`}>
                             <h3 className="text-3xl font-bold py-1 text-center text-white bg-title-2">{title}</h3>
                             {!hideCloseBtn && (<label htmlFor="my-modal-4" className="btn bg-inactive border-0 btn-xs btn-circle absolute right-2 top-2"><img className="w-3 h-3" src={cross} /></label>)}
