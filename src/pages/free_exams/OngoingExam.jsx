@@ -54,6 +54,9 @@ const OngoingExam = () => {
                   setTimer(lastTime.valueOf());
                 }
               }).catch(err => {
+                if (err.response?.status == 409) {
+                  openModal();
+                }
                 console.log(err);
               })
           } else {
@@ -66,6 +69,9 @@ const OngoingExam = () => {
 
 
           }
+        }).catch(err => {
+          navigate('/');
+          console.log(err.response?.status);
         })
     }
   }, [TOKEN, navigate, params]);
@@ -87,6 +93,9 @@ const OngoingExam = () => {
         setRunningData([...all]);
       }
     }).catch(err => {
+      if (err.response?.status == 409) {
+        openModal();
+      }
       console.log(err);
     })
   }
@@ -106,6 +115,9 @@ const OngoingExam = () => {
           }
         });
       }).catch(err => {
+        if (err.response?.status == 409) {
+          openModal();
+        }
         console.log(err);
       })
   }
@@ -154,7 +166,7 @@ const OngoingExam = () => {
           <p className="font-bold">{exam.name}</p>
         </div>
         <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
-          You have already completed the exam!
+          You have already completed the exam or Exam time is over!
         </h3>
         <p className="text-center text-2xl font-bold text-green-500">Best Wishes!</p>
         <div className="modal-action flex justify-right mb-1 ">
