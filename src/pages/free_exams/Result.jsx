@@ -30,7 +30,10 @@ const Result = () => {
         let valid_number = reg.test(value);
         return valid_number;
     }
-
+    function openModal() {
+        let checkedModal = document.getElementById('pop-up-modal')
+        checkedModal.checked = true;
+    }
     const handleSubmit = () => {
         if (checkNumberFunction(mobileNo)) {
             axios.get(`/api/freestudent/getrankfree?examId=${examId}&mobileNo=${mobileNo}`)
@@ -53,10 +56,11 @@ const Result = () => {
                 });
         } else {
             setError({ message: "Number not valid" });
-
-            let checkedModal = document.getElementById('my-modal-3')
-            checkedModal.checked = true;
+            openModal();
         }
+    }
+    const doAction = () => {
+        window.location.reload(false);
     }
     return (
         <>
@@ -83,7 +87,7 @@ const Result = () => {
                                 <input type="text" placeholder="তোমার মোবাইল নাম্বার লিখ" className="md:my-1 lg:mx-1 basis-1/2 input input-bordered md:basis-full" value={mobileNo} onChange={(e) => setmobileNo(e.target.value)} />
                             </div>
                             <div className="text-center my-4 max-w-sm mx-auto">
-                                <button className="btn-hover text-white font-bold pr-2 py-3 rounded-md disabled:bg-slate-300" disabled={examId == "" || !mobileNo} onClick={handleSubmit}>
+                                <button className="btn-hover text-white font-bold pr-2 py-3 rounded-md disabled:bg-slate-300" disabled={examId === "" || !mobileNo} onClick={handleSubmit}>
                                     Get Result
                                     <span className='btn-hover_icon'><RightArrow /></span>
                                 </button>
@@ -91,12 +95,28 @@ const Result = () => {
                         </div>
                     </div>
                 </div>
-                <Suspense fallback={null}>
-                    <Modal2 {...error} />
-                </Suspense>
-                <Suspense fallback={null}>
-                    <Modal {...resultDetails} />
-                </Suspense>
+            </div>
+            <Suspense fallback={null}>
+                <Modal2 {...error} />
+            </Suspense>
+            <Suspense fallback={null}>
+                <Modal {...resultDetails} />
+            </Suspense>
+            <input type="checkbox" id="pop-up-modal" className="modal-toggle" />
+            <div className="modal modal-middle">
+                <div className="modal-box pb-0">
+                    <div className="my-0 py-0 h-10 bg-orange-600 text-white text-center flex items-center justify-center ">
+                        <p className="font-bold">Notice</p>
+                    </div>
+                    <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
+                        No Student found!
+                    </h3>
+                    <div className="modal-action flex justify-right mb-1 ">
+                        <label htmlFor="pop-up-modal" onClick={() => doAction()} className="btn bg-red-600 text-white">
+                            Close
+                        </label>
+                    </div>
+                </div>
             </div>
         </>
     )

@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect } from "react";
 import moment from 'moment';
 import axios from "../../utils/axios";
 import { Link } from 'react-router-dom';
@@ -9,17 +9,18 @@ import ExamInfoDetails from "../../components/common/v2/ExamInfoDetails";
 import CountDownTwo from "../../components/common/CountDownTwo";
 import RightArrow from '../../components/common/svg/RightArrow';
 import Question from "../../components/common/Question";
-const Modal = lazy(() => import("../../components/common/v2/ResultSummery"));
-const Modal2 = lazy(() => import("../../components/common/Modal"));
+import Modal from "../../components/common/v2/ResultSummery";
+import Modal2 from "../../components/common/v2/Modal";
 
 const OngoingExam = () => {
 
-  const [params] = useState(new URLSearchParams(window.location.search));
   const navigate = useNavigate();
+  const [params] = useState(new URLSearchParams(window.location.search));
   const [homeUrl, setHomeUrl] = useState("/");
   const [TOKEN, setTOKEN] = useState(null);
   const [timer, setTimer] = useState(0);
   const [examData, setExamData] = useState(null);
+  const [exam, setExam] = useState({});
   const [runningData, setRunningData] = useState(null);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
@@ -53,24 +54,32 @@ const OngoingExam = () => {
                   setTimer(lastTime.valueOf());
                 }
               }).catch(err => {
+                if (err.response?.status == 409) {
+                  openModal();
+                }
                 console.log(err);
               })
           } else {
             setError({ title: "Can't start now", message: "Exam has ended" });
-            let checkedModal = document.getElementById('my-modal-3')
-            checkedModal.checked = true;
-            checkedModal.addEventListener('change', (e) => {
-              if (e.target.checked === false) {
-                navigate('/');
-              }
-            });
+            axios.get(`/api/freestudent/getexambyid?examId=${params.get('examId')}`).then(({ data }) => {
+              console.log(data);
+              setExam(data)
+              openModal();
+            })
+
 
           }
+        }).catch(err => {
+          navigate('/');
+          console.log(err.response?.status);
         })
     }
-  }, [TOKEN, params.get('examId')]);
+  }, [TOKEN, navigate, params]);
 
-
+  function openModal() {
+    let checkedModal = document.getElementById('pop-up-modal')
+    checkedModal.checked = true;
+  }
   const handleQuestionSelect = (event, activeQuestion) => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
     axios.put('/api/freestudent/updatequestion', {
@@ -78,12 +87,15 @@ const OngoingExam = () => {
       questionIndexNumber: activeQuestion,
       optionIndexNumber: event.target.value
     }).then(({ data }) => {
-      if (data == "Ok") {
+      if (data === "Ok") {
         let all = runningData;
         all[activeQuestion].answeredOption = event.target.value;
         setRunningData([...all]);
       }
     }).catch(err => {
+      if (err.response?.status == 409) {
+        openModal();
+      }
       console.log(err);
     })
   }
@@ -103,6 +115,9 @@ const OngoingExam = () => {
           }
         });
       }).catch(err => {
+        if (err.response?.status == 409) {
+          openModal();
+        }
         console.log(err);
       })
   }
@@ -140,13 +155,28 @@ const OngoingExam = () => {
           </div>
         </div>
       </div>
-      <Suspense fallback={null}>
-        <Modal2 {...error} />
-      </Suspense>
-      <Suspense fallback={null}>
-        <Modal {...result} />
-      </Suspense>
+
     </div>
+    <Modal2 {...error} />
+    <Modal {...result} />
+    <input type="checkbox" id="pop-up-modal" className="modal-toggle" />
+    <div className="modal modal-middle">
+      <div className="modal-box pb-0">
+        <div className="my-0 py-0 h-10 bg-orange-600 text-white text-center flex items-center justify-center ">
+          <p className="font-bold">{exam.name}</p>
+        </div>
+        <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
+          You have already completed the exam or Exam time is over!
+        </h3>
+        <p className="text-center text-2xl font-bold text-green-500">Best Wishes!</p>
+        <div className="modal-action flex justify-right mb-1 ">
+          <label htmlFor="pop-up-modal" onClick={() => navigate('/')} className="btn bg-red-600 text-white">
+            Close
+          </label>
+        </div>
+      </div>
+    </div>
+
   </>
   );
 };

@@ -16,12 +16,12 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
     return (
         <>
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-            {
-                result.examName && (
-                    <div className="modal modal-middle">
+            {/* {
+                result.examName && ( */}
+                    <div className="modal overflow-y-scroll flex-wrap modal-middle">
                         <div className={`modal-box rounded-2xl p-0 relative bg-${bgColor} ${customWidth}`}>
                             <h3 className="text-3xl font-bold py-1 text-center text-white bg-title-2">{title}</h3>
-                            {!hideCloseBtn && (<label htmlFor="my-modal-4" className="btn bg-inactive border-0 btn-xs btn-circle absolute right-2 top-2"><img className="w-3 h-3" src={cross} /></label>)}
+                            {!hideCloseBtn && (<label htmlFor="my-modal-4" className="btn bg-inactive border-0 btn-xs btn-circle absolute right-2 top-2"><img className="w-3 h-3" src={cross} alt='x' /></label>)}
                             <div className="relative md:min-h-[18rem] overflow-auto p-4">
                                 <h2 className="text-3xl font-bold mb-2">{result.examName} (Free Exam)</h2>
                                 <div className="grid tab:grid-cols-5 grid-flow-rows gap-x-4 tab-max:grid-cols-2 sm-min:grid-cols-2 gap-y-4 place-content-center resultSummery">
@@ -48,7 +48,7 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                         <div className='text-center text-xl text-slate-800 font-bold'>{result.totalNotAnswered}</div>
                                     </div>
                                     <div className="resultSummery_col_circle tab-max:col-span-2">
-                                        <CircularProgressbarWithChildren value={wrongPercentage == 100 ? 0 : result.totalCorrectAnswer}
+                                        <CircularProgressbarWithChildren value={wrongPercentage === 100 ? 0 : result.totalCorrectAnswer}
                                             maxValue={noOfQuestions}
                                             styles={buildStyles({
                                                 // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
@@ -67,10 +67,10 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                                 <span className='bottom'>{result.totalMarksMcq}</span>
                                             </div>
                                             <CircularProgressbar
-                                                value={wrongPercentage == 100 ? noOfQuestions : result.totalWrongAnswer}
+                                                value={wrongPercentage === 100 ? noOfQuestions : result.totalWrongAnswer}
                                                 maxValue={noOfQuestions}
                                                 styles={buildStyles({
-                                                    rotation: wrongPercentage == 100 ? 0 : parseFloat(result.totalCorrectAnswer / noOfQuestions),
+                                                    rotation: wrongPercentage === 100 ? 0 : parseFloat(result.totalCorrectAnswer / noOfQuestions),
                                                     trailColor: "transparent",
                                                     pathColor: "#ff0000",
                                                     strokeLinecap: "butt",
@@ -83,13 +83,13 @@ function ResultSummery({ title = 'Exam Result', result = {}, bgColor = 'warning'
                                 </div>
                                 <div className='text-center p-2 text-white text-xl'>
                                     <span className='py-1 px-3 btn-theme rounded-s-3xl'>Your Merit Position</span>
-                                    <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{result?.rank == "-1" ? "Pending" : myRank}</span>
+                                    <span className='py-1 px-3  bg-[#203a4a] rounded-e-3xl'>{parseInt(result?.rank) === -1 ? "Pending" : myRank}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                )
-            }
+                {/* )
+            } */}
         </>
     )
 }
