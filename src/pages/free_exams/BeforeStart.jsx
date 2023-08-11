@@ -105,13 +105,13 @@ const BeforeStart = () => {
                       <>
                         <div className="form-control mb-4">
                           <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">SSC Roll no</span>
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">SSC Batch</span>
                           </label>
                           <input
                             type="text"
                             
                             name="sscRoll"
-                            placeholder="তোমার SSC Roll no লিখ"
+                            placeholder="তোমার SSC ব্যাচ লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
@@ -135,13 +135,13 @@ const BeforeStart = () => {
                       <>
                         <div className="form-control mb-4">
                           <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Roll no</span>
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Batch</span>
                           </label>
                           <input
                             type="text"
                             
                             name="hscRoll"
-                            placeholder="তোমার HSC Roll no লিখ"
+                            placeholder="তোমার HSC ব্যাচ লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
