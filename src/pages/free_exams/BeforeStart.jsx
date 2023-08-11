@@ -109,13 +109,13 @@ const BeforeStart = () => {
                           </label>
                           <input
                             type="text"
-                            required
+                            
                             name="sscRoll"
                             placeholder="তোমার SSC Roll no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
-                        <div className="form-control mb-4">
+                        {/* <div className="form-control mb-4">
                           <label className="label">
                             <span className="absolute top-1 left-3 bg-white px-2 text-title-2">SSC Registration no</span>
                           </label>
@@ -126,7 +126,7 @@ const BeforeStart = () => {
                             placeholder="তোমার SSC Registration no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
-                        </div>
+                        </div> */}
                       </>
                     )
                   }
@@ -139,13 +139,13 @@ const BeforeStart = () => {
                           </label>
                           <input
                             type="text"
-                            required
+                            
                             name="hscRoll"
                             placeholder="তোমার HSC Roll no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
-                        <div className="form-control mb-4">
+                        {/* <div className="form-control mb-4">
                           <label className="label font-bold relative">
                             <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
                           </label>
@@ -156,7 +156,7 @@ const BeforeStart = () => {
                             placeholder="তোমার HSC Registration no লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
-                        </div>
+                        </div> */}
                       </>
                     )
                   }

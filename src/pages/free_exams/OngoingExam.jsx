@@ -18,6 +18,7 @@ const OngoingExam = () => {
   const [params] = useState(new URLSearchParams(window.location.search));
   const [homeUrl, setHomeUrl] = useState("/");
   const [TOKEN, setTOKEN] = useState(null);
+  const [modalMessage, setModalMessage] = useState("You have already completed the exam or Exam time is over!");
   const [timer, setTimer] = useState(0);
   const [examData, setExamData] = useState(null);
   const [exam, setExam] = useState({});
@@ -103,17 +104,19 @@ const OngoingExam = () => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
     axios.post('/api/freestudent/submitanswer?eId=' + params.get('examId'))
       .then(({ data }) => {
-        setResult({ bgColor: 'none', result: data, customWidth: 'max-w-4xl' });
-        let checkedModal = document.getElementById('my-modal-4')
-        checkedModal.checked = true;
-        checkedModal.addEventListener('change', (e) => {
-          if (e.target.checked === false) {
-            // sessionStorage.removeItem("FREESTDNTTKN");
-            // sessionStorage.removeItem("FREESTDNTID");
-            // sessionStorage.removeItem("FREEEXAMID");
-            navigate('/');
-          }
-        });
+        // setResult({ bgColor: 'none', result: data, customWidth: 'max-w-4xl' });
+        // let checkedModal = document.getElementById('my-modal-4')
+        // checkedModal.checked = true;
+        // checkedModal.addEventListener('change', (e) => {
+        //   if (e.target.checked === false) {
+        //     // sessionStorage.removeItem("FREESTDNTTKN");
+        //     // sessionStorage.removeItem("FREESTDNTID");
+        //     // sessionStorage.removeItem("FREEEXAMID");
+        //     navigate('/');
+        //   }
+        // });
+        setModalMessage("Your exam has been submitted and is awaiting evaluation.");
+        openModal();
       }).catch(err => {
         if (err.response?.status == 409) {
           openModal();
@@ -166,7 +169,7 @@ const OngoingExam = () => {
           <p className="font-bold">{exam.name}</p>
         </div>
         <h3 className="font-bold text-2xl text-center my-6 text-red-600 ">
-          You have already completed the exam or Exam time is over!
+          {modalMessage}
         </h3>
         <p className="text-center text-2xl font-bold text-green-500">Best Wishes!</p>
         <div className="modal-action flex justify-right mb-1 ">
