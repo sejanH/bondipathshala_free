@@ -15,7 +15,7 @@ const Result = () => {
     const [resultDetails, setResultDetails] = useState();
 
     useEffect(() => {
-        axios.get('/api/freestudent/getfreeexamall')
+        axios.get('/api/freestudent/getfreeexamnew')
             .then(({ data }) => {
                 setFreeExams(data);
             }).catch(err => {
