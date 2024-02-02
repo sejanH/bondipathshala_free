@@ -44,7 +44,22 @@ const OngoingExam = () => {
             axios.get('/api/freestudent/getrunningdata?eId=' + params.get('examId'))
               .then(({ data }) => {
                 setExamData(data.examData);
-                setRunningData(data.questionData);
+                // setRunningData(data.questionData);
+
+
+                if (!localStorage.getItem(params.get('examId'))) {
+                  setRunningData(data.questionData);
+                  let _answers = data.questionData.map((d) => d.answeredOption);
+                  localStorage.setItem(params.get('examId'), JSON.stringify(_answers));
+                } else {
+                  let _local = JSON.parse(localStorage.getItem(params.get('examId')));
+                  data.questionData.map((d, index) => {
+                    if (_local[index] !== "-1") {
+                      d.answeredOption = _local[index];
+                    }
+                  });
+                  setRunningData(data.questionData);
+                }
                 let maxDuration = moment.utc(data.timeData.endTine).subtract(6, 'h');
                 let lastTime = moment(maxDuration);
                 setTimer(lastTime.valueOf());
@@ -81,6 +96,7 @@ const OngoingExam = () => {
     let checkedModal = document.getElementById('pop-up-modal')
     checkedModal.checked = true;
   }
+  
   const handleQuestionSelect = (event, activeQuestion) => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
     axios.put('/api/freestudent/updatequestion', {
@@ -100,21 +116,23 @@ const OngoingExam = () => {
       console.log(err);
     })
   }
+
+  const handleQuestionSelectLocal = (event, activeQuestion) => {
+    let all = runningData;
+    all[activeQuestion].answeredOption = event.target.value;
+    setRunningData([...all]);
+
+    let _local = JSON.parse(localStorage.getItem(params.get('examId')));
+    _local[activeQuestion] = event.target.value;
+    localStorage.setItem(params.get('examId'), JSON.stringify(_local));
+  }
   const handleSubmit = () => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
-    axios.post('/api/freestudent/submitanswer?eId=' + params.get('examId'))
+    let _local = JSON.parse(localStorage.getItem(params.get('examId')));
+    axios.post('/api/freestudent/submitanswer?eId=' + params.get('examId'),{ answeredOptions: _local })
       .then(({ data }) => {
-        // setResult({ bgColor: 'none', result: data, customWidth: 'max-w-4xl' });
-        // let checkedModal = document.getElementById('my-modal-4')
-        // checkedModal.checked = true;
-        // checkedModal.addEventListener('change', (e) => {
-        //   if (e.target.checked === false) {
-        //     // sessionStorage.removeItem("FREESTDNTTKN");
-        //     // sessionStorage.removeItem("FREESTDNTID");
-        //     // sessionStorage.removeItem("FREEEXAMID");
-        //     navigate('/');
-        //   }
-        // });
+
+        localStorage.removeItem(params.get('examId'));
         setModalMessage("Your exam has been submitted and is awaiting evaluation.");
         openModal();
       }).catch(err => {
@@ -146,7 +164,7 @@ const OngoingExam = () => {
           {examData && <ExamInfoDetails examInfos={examData} />}
           <div className="p-6">
             {runningData ? runningData.map((question, index) => (
-              <Question question={question} index={index} key={index} handleQuestionSelect={handleQuestionSelect} />
+              <Question question={question} index={index} key={index} handleQuestionSelect={handleQuestionSelectLocal} />
             )) : (<Skeleton count={5} height={128}></Skeleton>)}
             {/* submit ans */}
             <div className="text-center my-4 max-w-sm mx-auto">
