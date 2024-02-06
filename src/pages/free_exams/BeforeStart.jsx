@@ -52,6 +52,7 @@ const BeforeStart = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    
     axios.post("/api/freestudent/addfreestudent", formData)
       .then(res => {
         if (res.status == 200 || res.status == 201) {
@@ -142,6 +143,96 @@ const BeforeStart = () => {
                             
                             name="hscRoll"
                             placeholder="তোমার HSC ব্যাচ লিখ"
+                            className="input border-2 border-title-2 focus:border-orange-600"
+                          />
+                        </div>
+                        {/* <div className="form-control mb-4">
+                          <label className="label font-bold relative">
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            name="hscReg"
+                            placeholder="তোমার HSC Registration no লিখ"
+                            className="input border-2 border-title-2 focus:border-orange-600"
+                          />
+                        </div> */}
+                      </>
+                    )
+                  }
+                  {
+                    examDetails.buetStatus && (
+                      <>
+                        <div className="form-control mb-4">
+                          <label className="label font-bold relative">
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">BUET Admission Roll</span>
+                          </label>
+                          <input
+                            type="text"
+                            
+                            name="buetRoll"
+                            placeholder="তোমার বুয়েটের রোল লিখ"
+                            className="input border-2 border-title-2 focus:border-orange-600"
+                          />
+                        </div>
+                        {/* <div className="form-control mb-4">
+                          <label className="label font-bold relative">
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            name="hscReg"
+                            placeholder="তোমার HSC Registration no লিখ"
+                            className="input border-2 border-title-2 focus:border-orange-600"
+                          />
+                        </div> */}
+                      </>
+                    )
+                  }
+                  {
+                    examDetails.medicalStatus && (
+                      <>
+                        <div className="form-control mb-4">
+                          <label className="label font-bold relative">
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">MEDICAL Admission Roll</span>
+                          </label>
+                          <input
+                            type="text"
+                            
+                            name="medicalRoll"
+                            placeholder="তোমার মেডিকেলের রোল লিখ"
+                            className="input border-2 border-title-2 focus:border-orange-600"
+                          />
+                        </div>
+                        {/* <div className="form-control mb-4">
+                          <label className="label font-bold relative">
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            name="hscReg"
+                            placeholder="তোমার HSC Registration no লিখ"
+                            className="input border-2 border-title-2 focus:border-orange-600"
+                          />
+                        </div> */}
+                      </>
+                    )
+                  }
+                  {
+                    examDetails.universityStatus && (
+                      <>
+                        <div className="form-control mb-4">
+                          <label className="label font-bold relative">
+                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">University Admission Roll</span>
+                          </label>
+                          <input
+                            type="text"
+                            
+                            name="medicalRoll"
+                            placeholder="তোমার বিশ্ববিদ্যালয়ের রোল লিখ"
                             className="input border-2 border-title-2 focus:border-orange-600"
                           />
                         </div>
