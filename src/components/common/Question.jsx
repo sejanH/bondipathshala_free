@@ -13,7 +13,8 @@ function Question({ question, index, handleQuestionSelect }) {
   }, [question]);
 
   return (
-    <div className="mb-6">
+    <div className="mb-6 relative">
+    <span className="questionNo">{counter}</span>
       <div className="mb-3 rounded-lg shadow-[0px_0px_6px_2px_rgba(0,0,0,0.75)]">
         {/* {counter}.{" "} */}
         {question.type == false ? (
