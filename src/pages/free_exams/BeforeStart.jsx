@@ -11,11 +11,11 @@ const BeforeStart = () => {
   let history = useNavigate();
   const [params] = useState(new URLSearchParams(window.location.search));
   const [freeExam, setFreeExam] = useState(null);
-  const [TOKEN, setTOKEN] = useState(null);
+  // const [TOKEN, setTOKEN] = useState(null);
   const [examDetails, setExamDetails] = useState();
   const [checkNumber, setCheckNumber] = useState("disabled");
   const [studentMobile, setStudentMobile] = useState();
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
 
   useEffect(() => {
     // setExamDetails(JSON.parse(sessionStorage.getItem("freeExam")));
@@ -55,7 +55,7 @@ const BeforeStart = () => {
     
     axios.post("/api/freestudent/addfreestudent", formData)
       .then(res => {
-        if (res.status == 200 || res.status == 201) {
+        if (parseInt(res.status) === 200 || parseInt(res.status) === 201) {
           axios.post("/api/freestudent/login", { mobileNo: studentMobile })
             .then(({ data }) => {
               axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;

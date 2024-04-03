@@ -1,3 +1,4 @@
+/* eslint-disable-line */
 import { useState, useEffect } from "react";
 import moment from 'moment';
 import axios from "../../utils/axios";
@@ -97,25 +98,25 @@ const OngoingExam = () => {
     checkedModal.checked = true;
   }
   
-  const handleQuestionSelect = (event, activeQuestion) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
-    axios.put('/api/freestudent/updatequestion', {
-      examId: params.get('examId'),
-      questionIndexNumber: activeQuestion,
-      optionIndexNumber: event.target.value
-    }).then(({ data }) => {
-      if (data === "Ok") {
-        let all = runningData;
-        all[activeQuestion].answeredOption = event.target.value;
-        setRunningData([...all]);
-      }
-    }).catch(err => {
-      if (err.response?.status == 409) {
-        openModal();
-      }
-      console.log(err);
-    })
-  }
+  // const handleQuestionSelect = (event, activeQuestion) => {
+  //   axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
+  //   axios.put('/api/freestudent/updatequestion', {
+  //     examId: params.get('examId'),
+  //     questionIndexNumber: activeQuestion,
+  //     optionIndexNumber: event.target.value
+  //   }).then(({ data }) => {
+  //     if (data === "Ok") {
+  //       let all = runningData;
+  //       all[activeQuestion].answeredOption = event.target.value;
+  //       setRunningData([...all]);
+  //     }
+  //   }).catch(err => {
+  //     if (err.response?.status == 409) {
+  //       openModal();
+  //     }
+  //     console.log(err);
+  //   })
+  // }
 
   const handleQuestionSelectLocal = (event, activeQuestion) => {
     let all = runningData;

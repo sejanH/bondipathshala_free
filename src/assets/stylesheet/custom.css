@@ -1,3 +1,4 @@
+/* eslint no-use-before-define: 0 */
 @use postcss-nested;
 /* Body */
 .bgdotted {
@@ -702,4 +703,19 @@
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
     box-shadow: 0 -15px 0 0 #203a4a;
+}
+
+.questionNo{
+    display: block;
+    text-align: center;
+    position: absolute;
+    line-height: normal;
+    height: 26px;
+    width: 26px;
+    color: #FFF;
+    background-color: rgb(234 88 12 / var(--tw-bg-opacity));
+    top: -13px;
+    left: -13px;
+    font-weight: 600;
+    border-radius: 50%;
 }
