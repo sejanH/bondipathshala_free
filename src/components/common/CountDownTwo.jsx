@@ -30,10 +30,15 @@ const renderer = ({ hours, minutes, seconds, completed }) => {
     );
   }
 };
-function CountDownTwo({ date, completedAction }) {
+function CountDownTwo({ date, completedAction,autoSubmit=true}) {
   return (
       <div className="">
-        <Countdown date={date} renderer={renderer} onComplete={completedAction} />
+       {
+        autoSubmit ?
+        <Countdown date={date} renderer={renderer} onComplete={completedAction} />:
+        <Countdown date={date} renderer={renderer} />
+      }
+
       </div>
   );
 }

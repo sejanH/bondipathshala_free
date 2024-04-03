@@ -159,8 +159,8 @@ const OngoingExam = () => {
             <span className="text-2xl font-bold capitalize text-white">Free Live Exam</span>
           </div>)}
           {timer > 0 && <div className="bg-white sticky top-0 pb-2 z-50">
-            <CountDownTwo date={timer} completedAction={handleSubmit} />
-          </div>}
+            <CountDownTwo date={timer} completedAction={handleSubmit} autoSubmit={false} />
+          </div>}  
           {examData && <ExamInfoDetails examInfos={examData} />}
           <div className="p-6">
             {runningData ? runningData.map((question, index) => (
