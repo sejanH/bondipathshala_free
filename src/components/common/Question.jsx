@@ -1,14 +1,13 @@
 /* eslint-disable */
 import { useEffect, useState } from "react";
+import 'katex/dist/katex.min.css'
+import Latex from 'react-latex-next'
 function Question({ question, index, handleQuestionSelect }) {
   const [counter, NULL] = useState(index + 1);
-  const [px, setPx] = useState('px-12');
   const [options, setOptions] = useState(question.options);
   useEffect(() => {
     if (question.type === false) {
       setOptions(Array.from(Array(question.optionCount)).map((e, i) => String.fromCharCode(65 + parseInt(i))));
-    }else{
-      setPx('px-1');
     }
   }, [question]);
 
@@ -22,14 +21,17 @@ function Question({ question, index, handleQuestionSelect }) {
             <img className="rounded-lg" src={`${process.env.REACT_APP_FILES_HOST}/${question.question}`} />
           </div>
         ) : (
-          <div className="py-2 px-3">{question.question}</div>
+          <div className="rounded-lg text-[1.5rem] font-bold p-4">
+           
+            <Latex> {question.question}</Latex>  
+          </div>
         )}
       </div>
-      <div className="grid grid-cols-2 grid-flow-row gap-x-8 gap-y-2">
+      {question.type === false ? (<div className="grid grid-cols-2 grid-flow-row gap-x-8 gap-y-2">
         {
           options.map((opt, idx) => (
             <div className="odd:justify-self-end even:justify-items-start" key={`opt.${idx}`}>
-              <label className={`custom-label cursor-pointer inline-flex items-center relative rounded-lg py-1 ${px}`}>
+              <label className="custom-label cursor-pointer inline-flex items-center relative rounded-lg py-1 px-12">
                 <input
                   onChange={(e) => handleQuestionSelect(e, index)}
                   type="radio"
@@ -38,19 +40,36 @@ function Question({ question, index, handleQuestionSelect }) {
                   checked={question.answeredOption == idx}
                   disabled={question.answeredOption !== "-1" && question.answeredOption != idx}
                 />
-                {
-                  question.type == false ?
-                    <span className="absolute left-[50%] -translate-x-[50%]"> {opt}</span>:
-                    <div className="min-w-[5.5rem]">
-                      <span className="absolute left-[10%] -translate-x-[25%]"> {String.fromCharCode(65 + parseInt(idx))}</span>
-                      <span className="optionValue">{opt}</span>
-                    </div>
-                }
+                <span className="absolute left-[50%] -translate-x-[50%]"> {opt}</span>
               </label>
             </div>
           ))
         }
-      </div>
+      </div>) : (
+        <div className="grid grid-cols-1 justify-items-start  gap-x-8 gap-y-5">
+          {
+            options.map((opt, idx) => (
+              <>
+              {/* <div className="md:hidden"></div> */}
+              <div className="" key={`opt.${idx}`}>
+                <label className="custom-label text-lg cursor-pointer inline-flex relative rounded-lg py-1 px-2 justify-center items-center">
+                  <input
+                    onChange={(e) => handleQuestionSelect(e, index)}
+                    type="radio"
+                    className="custom-radio custom-radio2"
+                    value={idx}
+                    checked={question.answeredOption == idx}
+                    disabled={question.answeredOption !== "-1" && question.answeredOption != idx}
+                  />
+                  <span className={`absolute left-[13px] ${idx===1? 'top-[7px]' : 'top-[5px]'}    font-bold flex`}>
+                    {String.fromCharCode(65 + parseInt(idx))}</span><p className="ml-3"><Latex>{opt}</Latex></p>
+                </label>
+              </div>
+              {/* <div className="md:hidden"></div> */}
+            </>))
+          }
+        </div>
+      )}
     </div>
   );
 }
