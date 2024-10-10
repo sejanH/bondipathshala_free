@@ -28,6 +28,8 @@ const OngoingExam = () => {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
+    
+    window.scrollTo(0,0)
     setTOKEN(sessionStorage.getItem("FREESTDNTTKN"));
     if (sessionStorage.getItem("FREESTDNTTKN")) {
       setHomeUrl("/");
@@ -35,6 +37,7 @@ const OngoingExam = () => {
   }, []);
   useEffect(() => {
     if (TOKEN) {
+      window.scrollTo(0,0)
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
 
       axios.get('/api/freestudent/examcheckmiddleware?eId=' + params.get('examId'))
@@ -42,6 +45,7 @@ const OngoingExam = () => {
           if (data === "assign") {
             navigate(`/exam/rules?examId=${params.get('examId')}`);
           } else if (data === "running") {
+            window.scrollTo(0,0)
             axios.get('/api/freestudent/getrunningdata?eId=' + params.get('examId'))
               .then(({ data }) => {
                 setExamData(data.examData);

@@ -47,6 +47,7 @@ const ExamRules = () => {
       .then(({ data }) => {
         setBtnText("Checking Complete");
         if (data === "assign") {
+          window.scrollTo(0,0)
           setBtnText("Assigning questions");
           axios.get('/api/freestudent/startexam?eId=' + params.get('examId'))
             .then(({ data }) => {
@@ -58,8 +59,10 @@ const ExamRules = () => {
               setBtnText('Start Exam');
             })
         } else if (data === "running") {
+          window.scrollTo(0,0)
           navigate(`/ongoing?examId=${params.get('examId')}`);
         } else {
+          window.scrollTo(0,0)
           navigate(`/ongoing?examId=${params.get('examId')}`);
           setModalData({ title: "Can't start now", message: "Exam has ended" });
           document.getElementById('my-modal-3').checked = true;
