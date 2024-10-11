@@ -53,6 +53,7 @@ function Question({ question, index, handleQuestionSelect }) {
               {/* <div className="md:hidden"></div> */}
               <div className="" key={`opt.${idx}`}>
                 <label className="custom-label text-lg cursor-pointer inline-flex relative rounded-lg py-1 px-2 justify-center items-center">
+                  <div className="relative flex justify-start items-center">
                   <input
                     onChange={(e) => handleQuestionSelect(e, index)}
                     type="radio"
@@ -61,8 +62,10 @@ function Question({ question, index, handleQuestionSelect }) {
                     checked={question.answeredOption == idx}
                     disabled={question.answeredOption !== "-1" && question.answeredOption != idx}
                   />
-                  <span className={`absolute left-[13px] ${idx===1? 'top-[7px]' : 'top-[5px]'}    font-bold flex`}>
-                    {String.fromCharCode(65 + parseInt(idx))}</span><p className="ml-3"><Latex>{opt}</Latex></p>
+                  <span className="absolute ml-1 font-bold ">
+                    {String.fromCharCode(65 + parseInt(idx))}</span>
+                  </div>
+                  <p className="ml-3"><Latex>{opt}</Latex></p>
                 </label>
               </div>
               {/* <div className="md:hidden"></div> */}
