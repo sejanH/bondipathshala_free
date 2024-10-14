@@ -86,7 +86,7 @@ const ExamRules = () => {
         </div>
       </div>
       <div className="px-28 md:px-4">
-        <div className="max-w-3xl container mx-auto pt-2 pb-24 min-h-body">
+        <div className="max-w-3xl container mx-auto pt-8 py-24 min-h-body">
           {/* exam content */}
           <div className="grid grid-cols-6  mt-4">
             <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 headerShadow ">
@@ -95,22 +95,6 @@ const ExamRules = () => {
                 <span className="text-2xl font-bold capitalize text-white">{examDetails?.name} <span className="md:hidden">(Free Live Exam)</span></span>
               </div>
               {/* user input box */}
-              <div className="border border-color-six px-2 py-2 rounded-md mt-6">
-                  <div className="text-center text-xl text-color-one h-7 relative">
-                    <span className="p-1 rounded-md btn-theme text-white absolute -top-7 left-[50%] -translate-x-[50%]">
-                      পরীক্ষার নিয়মাবলী
-                    </span>
-                  </div>
-                  {
-                    examRules && (<img src={`${process.env.REACT_APP_FILES_HOST}/${examRules?.ruleILink}`} />)
-                  }
-                </div>
-                <div className="block">
-                  {btnText === "Start Exam" ? (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" onClick={doMagic}>{btnText}
-                    <span className='btn-hover_icon'><RightArrow /></span></button>) :
-                    (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" disabled="disabled" onClick={doMagic}>{btnText}                        <span className='btn-hover_icon'><RightArrow /></span></button>)}
-
-                </div>
               <div className="p-4  md:py-4 rounded-e-md bg-white">
                 <Suspense fallback={null}>
                   <Toast {...error} />
@@ -138,7 +122,22 @@ const ExamRules = () => {
                     </div>
                   </div>
                 {/* exam rules */}
-                
+                <div className="border border-color-six px-2 py-2 rounded-md">
+                  <div className="text-center text-xl text-color-one h-7 relative">
+                    <span className="p-1 rounded-md btn-theme text-white absolute -top-7 left-[50%] -translate-x-[50%]">
+                      পরীক্ষার নিয়মাবলী
+                    </span>
+                  </div>
+                  {
+                    examRules && (<img src={`${process.env.REACT_APP_FILES_HOST}/${examRules?.ruleILink}`} />)
+                  }
+                </div>
+                <div className="block">
+                  {btnText === "Start Exam" ? (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" onClick={doMagic}>{btnText}
+                    <span className='btn-hover_icon'><RightArrow /></span></button>) :
+                    (<button type="button" className="w-full text-center btn-hover border-0 text-white rounded-md py-3 mt-6 mb-4" disabled="disabled" onClick={doMagic}>{btnText}                        <span className='btn-hover_icon'><RightArrow /></span></button>)}
+
+                </div>
                 <BackButton
                   title="Back to exam page"
                   url={`/before-start?exmId=${params.get('examId')}`}
