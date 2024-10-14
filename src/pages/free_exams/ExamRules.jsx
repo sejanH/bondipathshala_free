@@ -95,7 +95,7 @@ const ExamRules = () => {
                 <span className="text-2xl font-bold capitalize text-white">{examDetails?.name} <span className="md:hidden">(Free Live Exam)</span></span>
               </div>
               {/* user input box */}
-              <div className="border border-color-six px-2 py-2 rounded-md mt-2">
+              <div className="border border-color-six px-2 py-2 rounded-md mt-6">
                   <div className="text-center text-xl text-color-one h-7 relative">
                     <span className="p-1 rounded-md btn-theme text-white absolute -top-7 left-[50%] -translate-x-[50%]">
                       পরীক্ষার নিয়মাবলী
