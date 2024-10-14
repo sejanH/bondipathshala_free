@@ -37,7 +37,7 @@ const OngoingExam = () => {
   }, []);
   useEffect(() => {
     if (TOKEN) {
-      window.scrollTo(0,0)
+      // window.scrollTo(0,0)
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN;
 
       axios.get('/api/freestudent/examcheckmiddleware?eId=' + params.get('examId'))
@@ -160,7 +160,7 @@ const OngoingExam = () => {
     <div className="px-28 md:px-4">
       <div className="pb-8 container mx-auto max-w-4xl">
         {/* examInoDetails */}
-        <div className="bg-white rounded-xl">
+        <div className="bg-white rounded-xl" tabIndex={0}>
           {examData && (<div className="flex btn-theme rounded-t-xl py-1 justify-center">
             <span className="text-2xl font-bold capitalize text-white">Free Live Exam</span>
           </div>)}
