@@ -86,7 +86,7 @@ const ExamRules = () => {
         </div>
       </div>
       <div className="px-28 md:px-4">
-        <div className="max-w-3xl container mx-auto pt-8 py-24 min-h-body">
+        <div className="max-w-3xl container mx-auto pt-2 pb-24 min-h-body">
           {/* exam content */}
           <div className="grid grid-cols-6  mt-4">
             <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 headerShadow ">
