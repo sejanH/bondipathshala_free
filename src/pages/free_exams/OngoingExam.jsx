@@ -45,7 +45,7 @@ const OngoingExam = () => {
           if (data === "assign") {
             navigate(`/exam/rules?examId=${params.get('examId')}`);
           } else if (data === "running") {
-            window.scrollTo(0,0)
+            
             axios.get('/api/freestudent/getrunningdata?eId=' + params.get('examId'))
               .then(({ data }) => {
                 setExamData(data.examData);
@@ -74,6 +74,7 @@ const OngoingExam = () => {
                   lastTime = moment(moment.utc(data.timeData.startTime).add(maxDuration, "m"));
                   setTimer(lastTime.valueOf());
                 }
+                window.scrollTo(0,0)
               }).catch(err => {
                 if (err.response?.status == 409) {
                   openModal();
