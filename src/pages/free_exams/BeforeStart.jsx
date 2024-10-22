@@ -257,17 +257,14 @@ const BeforeStart = () => {
                           <div className="form-control mb-4">
                             <label className="label font-bold relative">
                               <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                                {examDetails.curriculumName + ' '}
-                                {examDetails.isAdmission === true &&
-                                  'Admission '}{' '}
-                                Roll no
+                                {examDetails.curriculumName }
                               </span>
                             </label>
                             <input
                               type="text"
                               required
                               name="sscRoll"
-                              placeholder="Roll no"
+                              placeholder={examDetails.curriculumName}
                               className="input border-2 border-title-2 focus:border-orange-600"
                             />
                           </div>
