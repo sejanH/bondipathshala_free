@@ -13,15 +13,15 @@ module.exports = {
       "2xl": "1536px",
       web: "1440px",
       tab: "834px",
-      "tab-max": { max: "833px" }
+      "tab-max": { max: "833px" },
     },
     fontFamily: {
       body: "Baloo Da 2",
-      montserrat: ['Montserrat', 'sans-serif']
+      montserrat: ["Montserrat", "sans-serif"],
     },
     extend: {
       colors: {
-        "inactive": "#203a4a",
+        inactive: "#203a4a",
         "footer-bg-top": "#203a4a",
         "footer-bg-bottom": "#203a4a",
         "btn-bg-top": "#FF4B00",
@@ -49,21 +49,22 @@ module.exports = {
         "border-one": "#F1F1F1",
         "title-1": "#01b8fb",
         "title-2": "#f26f21",
+        "color-fifty": "#008000",
       },
     },
   },
   plugins: [
-    require('postcss-import'),
-    require('tailwindcss/nesting')(require('postcss-nesting')),
-    require('autoprefixer'),
-    require('tailwindcss'),
+    require("postcss-import"),
+    require("tailwindcss/nesting")(require("postcss-nesting")),
+    require("autoprefixer"),
+    require("tailwindcss"),
     require("daisyui"),
-    require('autoprefixer')],
+    require("autoprefixer"),
+  ],
   // daisyUI config (optional)
   daisyui: {
     styled: true,
-    themes: [
-      "light", "dark"],
+    themes: ["light", "dark"],
     base: true,
     utils: true,
     logs: false,

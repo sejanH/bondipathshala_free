@@ -4,7 +4,7 @@ function ExamCardTwo({ exam, freeExam = false }) {
   return (
     <div className="upcoming">
       {freeExam ? <Link to={`/before-start?examId=${exam._id}`}>
-        <img className="cover" src={process.env.REACT_APP_FILES_HOST + "/" + exam.iLink} alt={exam.name} />
+        <img className="w-full" src={process.env.REACT_APP_FILES_HOST + "/" + exam.iLink} alt={exam.name} />
         <div className="timer_container flex flex-row p-2 align-center items-center">
           <div className="timer_container__timer grow text-3xl md:text-xl">
             {/* <Link className="text-3xl md:text-xl" to={`/exam/${exam._id}/before-start`}> */}

@@ -8,6 +8,7 @@ import FreeExamRules from './pages/free_exams/ExamRules';
 import FreeOngoingExam from './pages/free_exams/OngoingExam';
 import LandingPage from "./pages/LandingPage";
 import Result from "./pages/free_exams/Result";
+import FreeExamSolution from "./components/FreeExamSolution";
 
 export const pages = [
   {
@@ -32,6 +33,10 @@ export const pages = [
       {
         path:"/result",
         element: Result,
+      },
+      {
+        path:"/exams/:studentId/:examId/freesolution",
+        element: FreeExamSolution,
       }
     ],
   },
