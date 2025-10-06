@@ -21,11 +21,11 @@ const BeforeStart = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const freeExamId = queryParams.get("examId");
-  // console.log(freeExamId);
+  console.log(freeExamId);
 
   useEffect(() => {
+    setIsLoading(true);
     // setExamDetails(JSON.parse(sessionStorage.getItem("freeExam")));
-    // setIsLoading(true);
     // if (!sessionStorage.getItem("freeExam")) {
     //   sessionStorage.setItem("freeExam", JSON.stringify(freeExamId));
     // } else {
@@ -40,8 +40,8 @@ const BeforeStart = () => {
     axios.get("/api/exam/getexambyid?examId=" + freeExamId).then(({ data }) => {
       console.log(data);
       setExamDetails(data);
+      setIsLoading(false);
     });
-    setIsLoading(false);
   }, []);
 
   const checkNumberFunction = (e) => {
@@ -93,45 +93,45 @@ const BeforeStart = () => {
       <div className="px-4">
         <div className="max-w-3xl container mx-auto pt-8 pb-24">
           {/* exam content */}
-          <div className="grid grid-cols-6 gap-2 mt-4">
-            {isLoading ? (
-              <>
-                <div className="flex items-center justify-center h-40">
-                  <div className="flex space-x-2 text-xl text-gray-600 font-semibold">
-                    <span className="animate-bounce [animation-delay:0ms]">
-                      L
-                    </span>
-                    <span className="animate-bounce [animation-delay:100ms]">
-                      o
-                    </span>
-                    <span className="animate-bounce [animation-delay:200ms]">
-                      a
-                    </span>
-                    <span className="animate-bounce [animation-delay:300ms]">
-                      d
-                    </span>
-                    <span className="animate-bounce [animation-delay:400ms]">
-                      i
-                    </span>
-                    <span className="animate-bounce [animation-delay:500ms]">
-                      n
-                    </span>
-                    <span className="animate-bounce [animation-delay:600ms]">
-                      g
-                    </span>
-                    <span className="animate-bounce [animation-delay:700ms]">
-                      .
-                    </span>
-                    <span className="animate-bounce [animation-delay:800ms]">
-                      .
-                    </span>
-                    <span className="animate-bounce [animation-delay:900ms]">
-                      .
-                    </span>
-                  </div>
+          {isLoading ? (
+            <>
+              <div className="flex items-center justify-center h-40">
+                <div className="flex space-x-2 text-xl text-gray-600 font-semibold">
+                  <span className="animate-bounce [animation-delay:0ms]">
+                    L
+                  </span>
+                  <span className="animate-bounce [animation-delay:100ms]">
+                    o
+                  </span>
+                  <span className="animate-bounce [animation-delay:200ms]">
+                    a
+                  </span>
+                  <span className="animate-bounce [animation-delay:300ms]">
+                    d
+                  </span>
+                  <span className="animate-bounce [animation-delay:400ms]">
+                    i
+                  </span>
+                  <span className="animate-bounce [animation-delay:500ms]">
+                    n
+                  </span>
+                  <span className="animate-bounce [animation-delay:600ms]">
+                    g
+                  </span>
+                  <span className="animate-bounce [animation-delay:700ms]">
+                    .
+                  </span>
+                  <span className="animate-bounce [animation-delay:800ms]">
+                    .
+                  </span>
+                  <span className="animate-bounce [animation-delay:900ms]">
+                    .
+                  </span>
                 </div>
-              </>
-            ) : (
+              </div>
+            </>
+          ) : (
+            <div className="grid grid-cols-6 gap-2 mt-4">
               <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 ">
                 {examDetails && (
                   <div className="border border-color-six mt-4 px-12 md:px-4 py-8 mb-4 md:py-4 rounded-lg bg-white">
@@ -231,8 +231,8 @@ const BeforeStart = () => {
                   </div>
                 )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         <Suspense fallback={null}>
