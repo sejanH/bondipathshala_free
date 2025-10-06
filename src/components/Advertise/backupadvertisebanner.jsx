@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios";
 import { NavLink } from "react-router-dom";
 
-function AdvertiseEmbeded() {
+function AdvertiseBanner() {
   const [isLoading, setIsLoading] = useState(false);
   const [ad, setAd] = useState(null);
   const [error, setError] = useState(null);
@@ -37,7 +37,7 @@ function AdvertiseEmbeded() {
   if (error || !ad) return null; // hide completely when error or no ad
 
   return (
-    <div className="flex justify-center items-center p-6">
+    <div className="flex justify-center items-center py-2">
       <div
         className="rounded-2xl shadow-lg overflow-hidden 
                    w-full max-w-lg sm:max-w-xl md:max-w-2xl
@@ -61,7 +61,7 @@ function AdvertiseEmbeded() {
           </NavLink>
 
           {/* Visit Button */}
-          <div className="p-4 flex justify-center bg-white">
+          <div className="p-4 flex justify-center">
             <NavLink
               to={
                 ad?.forwardingLink?.startsWith("http")
@@ -71,7 +71,7 @@ function AdvertiseEmbeded() {
               target="_blank"
               className="btn-theme px-6 py-2 rounded-lg text-white text-lg font-semibold shadow-md hover:shadow-xl transition"
             >
-              Visit
+              বিস্তারিত দেখতে ক্লিক কর
             </NavLink>
           </div>
         </div>
@@ -93,4 +93,4 @@ function AdvertiseEmbeded() {
   );
 }
 
-export default AdvertiseEmbeded;
+export default AdvertiseBanner;
