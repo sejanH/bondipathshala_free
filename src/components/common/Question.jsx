@@ -1,19 +1,19 @@
 /* eslint-disable */
-import { useEffect, useState } from 'react'
-import 'katex/dist/katex.min.css'
-import Latex from 'react-latex-next'
+import { useEffect, useState } from "react";
+import "katex/dist/katex.min.css";
+import Latex from "react-latex-next";
 function Question({ question, index, handleQuestionSelect }) {
-  const [counter, NULL] = useState(index + 1)
-  const [options, setOptions] = useState(question.options)
+  const [counter, NULL] = useState(index + 1);
+  const [options, setOptions] = useState(question.options);
   useEffect(() => {
     if (question.type === false) {
       setOptions(
         Array.from(Array(question.optionCount)).map((e, i) =>
           String.fromCharCode(65 + parseInt(i))
         )
-      )
+      );
     }
-  }, [question])
+  }, [question]);
 
   return (
     <div className="mb-6 relative">
@@ -48,12 +48,12 @@ function Question({ question, index, handleQuestionSelect }) {
                   value={idx}
                   checked={question.answeredOption == idx}
                   disabled={
-                    question.answeredOption !== '-1' &&
+                    question.answeredOption !== "-1" &&
                     question.answeredOption != idx
                   }
                 />
                 <span className="absolute left-[50%] -translate-x-[50%]">
-                  {' '}
+                  {" "}
                   {opt}
                 </span>
               </label>
@@ -75,7 +75,7 @@ function Question({ question, index, handleQuestionSelect }) {
                       value={idx}
                       checked={question.answeredOption == idx}
                       disabled={
-                        question.answeredOption !== '-1' &&
+                        question.answeredOption !== "-1" &&
                         question.answeredOption != idx
                       }
                     />
@@ -94,7 +94,7 @@ function Question({ question, index, handleQuestionSelect }) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Question
+export default Question;

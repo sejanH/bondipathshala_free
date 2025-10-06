@@ -14,25 +14,34 @@ const BeforeStart = () => {
   // const [TOKEN, setTOKEN] = useState(null);
   const [examDetails, setExamDetails] = useState();
   const [checkNumber, setCheckNumber] = useState("disabled");
+  const [isLoading, setIsLoading] = useState(false);
   const [studentMobile, setStudentMobile] = useState();
+  const [curriculumRoll, setCurriculmRoll] = useState(null);
   const [error] = useState(null);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const freeExamId = queryParams.get("examId");
-  console.log(freeExamId);
+  // console.log(freeExamId);
 
   useEffect(() => {
     // setExamDetails(JSON.parse(sessionStorage.getItem("freeExam")));
+    // setIsLoading(true);
+    // if (!sessionStorage.getItem("freeExam")) {
+    //   sessionStorage.setItem("freeExam", JSON.stringify(freeExamId));
+    // } else {
+    //   const res = JSON.parse(sessionStorage.getItem("freeExam"));
+    //   if (res) {
+    //     console.log(res);
+    //     setExamDetails(res);
+    //     setFreeExam(res._id);
+    //   }
+    // }
 
-    if (!sessionStorage.getItem("freeExam")) {
-      sessionStorage.setItem("freeExam", JSON.stringify(freeExamId));
-    } else {
-      const res = JSON.parse(sessionStorage.getItem("freeExam"));
-      if (res) {
-        setExamDetails(res);
-        setFreeExam(res._id);
-      }
-    }
+    axios.get("/api/exam/getexambyid?examId=" + freeExamId).then(({ data }) => {
+      console.log(data);
+      setExamDetails(data);
+    });
+    setIsLoading(false);
   }, []);
 
   const checkNumberFunction = (e) => {
@@ -48,7 +57,10 @@ const BeforeStart = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+    // for (const pair of formData.entries()) {
+    //   console.log(`${pair[0]}: ${pair[1]}`);
+    // }
+    // return;
     axios
       .post("/api/freestudent/addfreestudent", formData)
       .then((res) => {
@@ -82,250 +94,144 @@ const BeforeStart = () => {
         <div className="max-w-3xl container mx-auto pt-8 pb-24">
           {/* exam content */}
           <div className="grid grid-cols-6 gap-2 mt-4">
-            <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 ">
-              {/* user input box */}
-              {examDetails && (
-                <div className="border border-color-six mt-4 px-12 md:px-4 py-8 mb-4 md:py-4 rounded-lg bg-white">
-                  <h2 className="font-bold text-3xl text-center text-title-2">
-                    My Profile
-                  </h2>
-                  <form onSubmit={onSubmitHandler}>
-                    <div className="form-control mb-4">
-                      <label className="label font-bold relative">
-                        <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                          Name
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        name="name"
-                        placeholder="তোমার নাম ইংরেজিতে লিখ"
-                        className="input border-2 border-title-2 focus:border-orange-600"
-                      />
-                    </div>
-                    {examDetails.sscStatus && (
-                      <>
-                        <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                              SSC Batch
-                            </span>
-                          </label>
-                          <input
-                            type="text"
-                            name="sscRoll"
-                            placeholder="তোমার SSC ব্যাচ লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div>
-                        {/* <div className="form-control mb-4">
-                          <label className="label">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">SSC Registration no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="sscReg"
-                            placeholder="তোমার SSC Registration no লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div> */}
-                      </>
-                    )}
-                    {examDetails.hscStatus && (
-                      <>
-                        <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                              HSC Batch
-                            </span>
-                          </label>
-                          <input
-                            type="text"
-                            name="hscRoll"
-                            placeholder="তোমার HSC ব্যাচ লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div>
-                        {/* <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="hscReg"
-                            placeholder="তোমার HSC Registration no লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div> */}
-                      </>
-                    )}
-                    {examDetails.buetStatus && (
-                      <>
-                        <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                              BUET Admission Roll
-                            </span>
-                          </label>
-                          <input
-                            type="text"
-                            name="buetRoll"
-                            placeholder="তোমার বুয়েটের রোল লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div>
-                        {/* <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="hscReg"
-                            placeholder="তোমার HSC Registration no লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div> */}
-                      </>
-                    )}
-                    {examDetails.medicalStatus && (
-                      <>
-                        <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                              MEDICAL Admission Roll
-                            </span>
-                          </label>
-                          <input
-                            type="text"
-                            name="medicalRoll"
-                            placeholder="তোমার মেডিকেলের রোল লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div>
-                        {/* <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="hscReg"
-                            placeholder="তোমার HSC Registration no লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div> */}
-                      </>
-                    )}
-                    {examDetails.universityStatus && (
-                      <>
-                        <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                              University Admission Roll
-                            </span>
-                          </label>
-                          <input
-                            type="text"
-                            name="medicalRoll"
-                            placeholder="তোমার বিশ্ববিদ্যালয়ের রোল লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div>
-                        {/* <div className="form-control mb-4">
-                          <label className="label font-bold relative">
-                            <span className="absolute top-1 left-3 bg-white px-2 text-title-2">HSC Registration no</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            name="hscReg"
-                            placeholder="তোমার HSC Registration no লিখ"
-                            className="input border-2 border-title-2 focus:border-orange-600"
-                          />
-                        </div> */}
-                      </>
-                    )}
-                    {examDetails.curriculumName !== null &&
-                      examDetails.curriculumName !== "null" &&
-                      examDetails.curriculumName !== undefined && (
-                        <>
-                          <div className="form-control mb-4">
-                            <label className="label font-bold relative">
-                              <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                                {examDetails.curriculumName + "curriculum"}
-                              </span>
-                            </label>
-                            <input
-                              type="text"
-                              required
-                              name="sscRoll"
-                              placeholder={examDetails.curriculumName}
-                              className="input border-2 border-title-2 focus:border-orange-600"
-                            />
-                          </div>
-                        </>
-                      )}
-
-                    <div className="form-control mb-4">
-                      <label className="label font-bold relative">
-                        <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                          Institution Name
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        name="institution"
-                        placeholder="তোমার স্কুল বা কলেজের সম্পুর্ন নাম ইংরেজিতে লিখ"
-                        className="input border-2 border-title-2 focus:border-orange-600"
-                      />
-                    </div>
-                    <div className="form-control mb-4 ">
-                      <label className="label font-bold relative">
-                        <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
-                          Mobile Number
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        name="mobileNo"
-                        placeholder="তোমার মোবাইল নাম্বার লিখ"
-                        className={`input border-2 ${
-                          checkNumber !== ""
-                            ? "border-rose-600"
-                            : "border-title-2"
-                        } focus:border-orange-600`}
-                        onChange={(e) => checkNumberFunction(e)}
-                      />
-                    </div>
-                    {/* start exam button */}
-                    <div className="form-control mb-4">
-                      <button
-                        type="submit"
-                        className="btn-hover border-0 rounded-md py-3 pr-1 my-4 disabled:bg-color-five"
-                        disabled={checkNumber}
-                      >
-                        Continue to Exam
-                        <span className="btn-hover_icon">
-                          <RightArrow />
-                        </span>
-                      </button>
-                    </div>
-                  </form>
-
-                  <BackButton
-                    title="Back to exam page"
-                    url="/"
-                    icon={backIcon}
-                  />
+            {isLoading ? (
+              <>
+                <div className="flex items-center justify-center h-40">
+                  <div className="flex space-x-2 text-xl text-gray-600 font-semibold">
+                    <span className="animate-bounce [animation-delay:0ms]">
+                      L
+                    </span>
+                    <span className="animate-bounce [animation-delay:100ms]">
+                      o
+                    </span>
+                    <span className="animate-bounce [animation-delay:200ms]">
+                      a
+                    </span>
+                    <span className="animate-bounce [animation-delay:300ms]">
+                      d
+                    </span>
+                    <span className="animate-bounce [animation-delay:400ms]">
+                      i
+                    </span>
+                    <span className="animate-bounce [animation-delay:500ms]">
+                      n
+                    </span>
+                    <span className="animate-bounce [animation-delay:600ms]">
+                      g
+                    </span>
+                    <span className="animate-bounce [animation-delay:700ms]">
+                      .
+                    </span>
+                    <span className="animate-bounce [animation-delay:800ms]">
+                      .
+                    </span>
+                    <span className="animate-bounce [animation-delay:900ms]">
+                      .
+                    </span>
+                  </div>
                 </div>
-              )}
-            </div>
+              </>
+            ) : (
+              <div className="col-start-2 md:col-start-1 col-span-4 md:col-span-6 ">
+                {examDetails && (
+                  <div className="border border-color-six mt-4 px-12 md:px-4 py-8 mb-4 md:py-4 rounded-lg bg-white">
+                    <h2 className="font-bold text-3xl text-center text-title-2">
+                      My Profilek
+                    </h2>
+                    <form onSubmit={onSubmitHandler}>
+                      <div className="form-control mb-4">
+                        <label className="label font-bold relative">
+                          <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
+                            Name
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          name="name"
+                          placeholder="তোমার নাম ইংরেজিতে লিখ"
+                          className="input border-2 border-title-2 focus:border-orange-600"
+                        />
+                      </div>
+
+                      {examDetails.curriculumName !== null &&
+                        examDetails.curriculumName !== "null" &&
+                        examDetails.curriculumName !== undefined && (
+                          <>
+                            <div className="form-control mb-4">
+                              <label className="label font-bold relative">
+                                <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
+                                  {examDetails.curriculumName + " Roll"}
+                                </span>
+                              </label>
+                              <input
+                                type="text"
+                                required
+                                name="curriculumRoll"
+                                placeholder={examDetails.curriculumName}
+                                className="input border-2 border-title-2 focus:border-orange-600"
+                              />
+                            </div>
+                          </>
+                        )}
+
+                      <div className="form-control mb-4">
+                        <label className="label font-bold relative">
+                          <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
+                            Institution Name
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          name="institution"
+                          placeholder="তোমার স্কুল বা কলেজের সম্পুর্ন নাম ইংরেজিতে লিখ"
+                          className="input border-2 border-title-2 focus:border-orange-600"
+                        />
+                      </div>
+                      <div className="form-control mb-4 ">
+                        <label className="label font-bold relative">
+                          <span className="absolute top-1 left-3 bg-white px-2 text-title-2">
+                            Mobile Number
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          name="mobileNo"
+                          placeholder="তোমার মোবাইল নাম্বার লিখ"
+                          className={`input border-2 ${
+                            checkNumber !== ""
+                              ? "border-rose-600"
+                              : "border-title-2"
+                          } focus:border-orange-600`}
+                          onChange={(e) => checkNumberFunction(e)}
+                        />
+                      </div>
+                      {/* start exam button */}
+                      <div className="form-control mb-4">
+                        <button
+                          type="submit"
+                          className="btn-hover border-0 rounded-md py-3 pr-1 my-4 disabled:bg-color-five"
+                          disabled={checkNumber}
+                        >
+                          Continue to Exam
+                          <span className="btn-hover_icon">
+                            <RightArrow />
+                          </span>
+                        </button>
+                      </div>
+                    </form>
+
+                    <BackButton
+                      title="Back to exam page"
+                      url="/"
+                      icon={backIcon}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
