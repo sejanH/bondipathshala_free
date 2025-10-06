@@ -136,7 +136,7 @@ const BeforeStart = () => {
                 {examDetails && (
                   <div className="border border-color-six mt-4 px-12 md:px-4 py-8 mb-4 md:py-4 rounded-lg bg-white">
                     <h2 className="font-bold text-3xl text-center text-title-2">
-                      My Profilek
+                      My Profile
                     </h2>
                     <form onSubmit={onSubmitHandler}>
                       <div className="form-control mb-4">
