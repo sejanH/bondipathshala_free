@@ -14,15 +14,14 @@ const LandingPage = () => {
   const [upcoming, setUpcoming] = useState([]);
 
   useEffect(() => {
-    sessionStorage.removeItem("FREESTDNTTKN");
-    sessionStorage.removeItem("FREESTDNTID");
-    sessionStorage.removeItem("FREEEXAMID");
+    // const assigned = [];
+    // localStorage.setItem("assigned", JSON.stringify(assigned));
 
     axios
-      .get("/api/freestudent/getliveexam")
-      .then((res) => {
-        setFreeExam(res.data.live || []);
-        setUpcoming(res.data.upcoming || []);
+      .get("/api/home/homepagefree?courseId=64bada5358781d50e8ecaafd")
+      .then(({ data }) => {
+        setFreeExam(data.live || []);
+        setUpcoming(data.upcoming || []);
       })
       .catch((err) => {
         console.error("Error fetching exams:", err);

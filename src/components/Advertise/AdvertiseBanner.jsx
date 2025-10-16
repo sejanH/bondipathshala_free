@@ -9,15 +9,18 @@ function AdvertiseBanner() {
 
   useEffect(() => {
     setIsLoading(true);
-
     const fetchAds = async () => {
       try {
         const res = await axios.get(
-          "api/advertise/getonead?courseId=64bada5358781d50e8ecaafd"
+          "/api/home/homepagefree?courseId=64bada5358781d50e8ecaafd"
         );
-
-        if (res.data && (res.data.iLink || res.data.forwardingLink)) {
-          setAd(res.data);
+        // console.log(res);
+        if (
+          res.data.advertiseData &&
+          (res.data.advertiseData.iLink ||
+            res.advertiseData.data.forwardingLink)
+        ) {
+          setAd(res.data.advertiseData);
         } else {
           setAd(null);
         }

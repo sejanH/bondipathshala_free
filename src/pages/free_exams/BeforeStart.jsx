@@ -21,27 +21,42 @@ const BeforeStart = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const freeExamId = queryParams.get("examId");
-  console.log(freeExamId);
+
+  const navigate = useNavigate();
+
+  // console.log(freeExamId);
 
   useEffect(() => {
     setIsLoading(true);
-    // setExamDetails(JSON.parse(sessionStorage.getItem("freeExam")));
-    // if (!sessionStorage.getItem("freeExam")) {
-    //   sessionStorage.setItem("freeExam", JSON.stringify(freeExamId));
-    // } else {
-    //   const res = JSON.parse(sessionStorage.getItem("freeExam"));
-    //   if (res) {
-    //     console.log(res);
-    //     setExamDetails(res);
-    //     setFreeExam(res._id);
-    //   }
-    // }
-
-    axios.get("/api/exam/getexambyid?examId=" + freeExamId).then(({ data }) => {
-      console.log(data);
-      setExamDetails(data);
-      setIsLoading(false);
-    });
+    // co;
+    let assigned = JSON.parse(localStorage.getItem("assigned"));
+    if (!assigned) {
+      const obj = {
+        examId: freeExamId,
+        assigned: true,
+        runningData: false,
+      };
+      let data = [];
+      data.push(obj);
+      localStorage.setItem("assigned", JSON.stringify(data));
+    } else {
+      for (let i = 0; i < assigned.length; i++) {
+        if (
+          assigned[i].examId === freeExamId &&
+          assigned[i].runningData == true
+        ) {
+          history(`/ongoing?examId=${freeExamId}`);
+        }
+      }
+    }
+    axios
+      .get("/api/freestudent/getexambyid?examId=" + freeExamId)
+      .then(({ data }) => {
+        console.log(data);
+        setExamDetails(data);
+        localStorage.setItem(`${freeExamId}details`, JSON.stringify(data));
+        setIsLoading(false);
+      });
   }, []);
 
   const checkNumberFunction = (e) => {
@@ -57,23 +72,32 @@ const BeforeStart = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    // for (const pair of formData.entries()) {
-    //   console.log(`${pair[0]}: ${pair[1]}`);
-    // }
-    // return;
+
     axios
-      .post("/api/freestudent/addfreestudent", formData)
-      .then((res) => {
-        if (parseInt(res.status) === 200 || parseInt(res.status) === 201) {
+      .get("/api/freestudent/getexamdetails?mobileNo=" + studentMobile)
+      .then(({ data }) => {
+        if (data.finishedStatus) {
+          window.alert("you already completed the exam");
+          navigate("/");
+        } else {
           axios
-            .post("/api/freestudent/login", { mobileNo: studentMobile })
-            .then(({ data }) => {
-              axios.defaults.headers.common["Authorization"] =
-                "Bearer " + data.token;
-              sessionStorage.setItem("FREESTDNTTKN", data.token);
-              sessionStorage.setItem("FREESTDNTID", data.studentIdStr);
-              sessionStorage.setItem("FREEEXAMID", params.get("examId"));
-              history(`/rules?examId=${freeExamId}`);
+            .post("/api/freestudent/addfreestudent", formData)
+            .then((res) => {
+              if (
+                parseInt(res.status) === 200 ||
+                parseInt(res.status) === 201
+              ) {
+                axios
+                  .post("/api/freestudent/login", { mobileNo: studentMobile })
+                  .then(({ data }) => {
+                    axios.defaults.headers.common["Authorization"] =
+                      "Bearer " + data.token;
+                    sessionStorage.setItem("FREESTDNTTKN", data.token);
+                    sessionStorage.setItem("FREESTDNTID", data.studentIdStr);
+                    sessionStorage.setItem("FREEEXAMID", params.get("examId"));
+                    history(`/rules?examId=${freeExamId}`);
+                  });
+              }
             });
         }
       })
@@ -207,6 +231,12 @@ const BeforeStart = () => {
                           } focus:border-orange-600`}
                           onChange={(e) => checkNumberFunction(e)}
                         />
+                        <span className="text-red-700 font-extrabold text-xl flex justify-center items-center mt-2 ">
+                          No Space allowed, only 11digits
+                        </span>
+                        <span className="text-red-700 font-extrabold text-xl flex justify-center items-center mt-1 ">
+                          example:016XXXXX456
+                        </span>
                       </div>
                       {/* start exam button */}
                       <div className="form-control mb-4">
