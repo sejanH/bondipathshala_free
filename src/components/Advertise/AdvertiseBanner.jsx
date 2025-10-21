@@ -9,18 +9,17 @@ function AdvertiseBanner() {
 
   useEffect(() => {
     setIsLoading(true);
+    const courseId = localStorage.getItem("FORCOURSE");
+
     const fetchAds = async () => {
       try {
         const res = await axios.get(
-          "/api/home/homepagefree?courseId=64bada5358781d50e8ecaafd"
+          "api/advertise/getonead?courseId=64bada5358781d50e8ecaafd" //server
+          // "api/advertise/getonead?courseId=68e643b1dd09b81da3dbfbe1" //local
         );
-        // console.log(res);
-        if (
-          res.data.advertiseData &&
-          (res.data.advertiseData.iLink ||
-            res.advertiseData.data.forwardingLink)
-        ) {
-          setAd(res.data.advertiseData);
+
+        if (res.data && (res.data.iLink || res.data.forwardingLink)) {
+          setAd(res.data);
         } else {
           setAd(null);
         }
