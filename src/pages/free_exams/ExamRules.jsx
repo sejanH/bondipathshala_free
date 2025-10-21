@@ -63,7 +63,7 @@ const ExamRules = () => {
         setTimeout(() => {
           setFlag(1);
           setIsLoading(false);
-        }, 3000);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);

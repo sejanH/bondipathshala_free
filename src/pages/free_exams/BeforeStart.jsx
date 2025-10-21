@@ -72,7 +72,7 @@ const BeforeStart = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+    setIsLoading(true);
     axios
       .get("/api/freestudent/getexamdetails?mobileNo=" + studentMobile)
       .then(({ data }) => {
@@ -90,6 +90,7 @@ const BeforeStart = () => {
                 axios
                   .post("/api/freestudent/login", { mobileNo: studentMobile })
                   .then(({ data }) => {
+                    setIsLoading(false);
                     axios.defaults.headers.common["Authorization"] =
                       "Bearer " + data.token;
                     sessionStorage.setItem("FREESTDNTTKN", data.token);
