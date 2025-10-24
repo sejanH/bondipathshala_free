@@ -128,6 +128,8 @@ const OngoingExam = () => {
           .catch((err) => {
             setIsLoading(false);
             if (err.response?.status == 409) {
+              alert("you already attempted the exam");
+              navigate("/");
               openModal();
             }
             console.log(err);

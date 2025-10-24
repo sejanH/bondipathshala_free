@@ -29,6 +29,7 @@ const BeforeStart = () => {
   useEffect(() => {
     setIsLoading(true);
     // co;
+    localStorage.clear();
     let assigned = JSON.parse(localStorage.getItem("assigned"));
     if (!assigned) {
       const obj = {
@@ -76,6 +77,7 @@ const BeforeStart = () => {
     axios
       .get("/api/freestudent/getexamdetails?mobileNo=" + studentMobile)
       .then(({ data }) => {
+        console.log(data);
         if (data.finishedStatus) {
           window.alert("you already completed the exam");
           navigate("/");
